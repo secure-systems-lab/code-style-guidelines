@@ -613,92 +613,89 @@ class foo:
 ```
 
 
-    General Variable Names
+### General Variable Names ###
 
-      Should be the same as function names, always use lower case, using 
-      an underscore if a separation is needed, such as: popanitem or pop_an_item
+Should be the same as function names, always use lower case, using an
+underscore if a separation is needed, such as: popanitem or pop_an_item
 
-    Constants
+### Constants ###
         
-      Variables which are set once and never change value should be all
-      upper case, if a seperator is needed use an underscore.
+Variables which are set once and never change value should be all upper case,
+if a seperator is needed use an underscore.
       
 
-    Exception Names
+### Exception Names ###
 
-      Because exceptions should be classes, the class naming convention
-      applies here.  However, you should use the suffix "Error" on your
-      exception names (if the exception actually is an error).
+Because exceptions should be classes, the class naming convention applies here.
+However, you should use the suffix "Error" on your exception names (if the
+exception actually is an error).
 
-    Global Variable Names
+### Global Variable Names ###
 
-      (Let's hope that these variables are meant for use inside one module
-      only.)  The conventions are about the same as those for functions.
+(Let's hope that these variables are meant for use inside one module only.)
+The conventions are about the same as those for functions.
 
-      If you can do it without globals in an intelligent way, then don't use globals.   
-      When you must use globals then explain why you need to use globals.   An example 
-      that uses globals in a good way is a program that keeps a cache.
+If you can do it without globals in an intelligent way, then don't use globals.
+When you must use globals then explain why you need to use globals.   An
+example that uses globals in a good way is a program that keeps a cache.
 
-    Function Names
+### Function Names ###
 
-      Function names should be lowercase, with words separated by underscores
-      as necessary to improve readability.
+Function names should be lowercase, with words separated by underscores as
+necessary to improve readability.
 
-      !mixedCase is allowed only in contexts where that's already the
-      prevailing style (e.g. threading.py), to retain backwards compatibility.
+!mixedCase is allowed only in contexts where that's already the prevailing
+style (e.g. threading.py), to retain backwards compatibility.
 
-    Function and method arguments
+### Function and method arguments ###
 
-      Always use 'self' for the first argument to instance methods.
+Always use 'self' for the first argument to instance methods.
 
-      If a function argument's name clashes with a reserved keyword, it is
-      generally better to append a single trailing underscore rather than use
-      an abbreviation or spelling corruption.  Thus "print_" is better than
-      "prnt".  (Perhaps better is to avoid such clashes by using a synonym.)
-
-
+If a function argument's name clashes with a reserved keyword, it is generally
+better to append a single trailing underscore rather than use an abbreviation
+or spelling corruption.  Thus "print_" is better than "prnt".  (Perhaps better
+is to avoid such clashes by using a synonym.)
 
 
 ## Programming Recommendations ##
 
+Comparisons to singletons like None should always be done with 'is' or 'is
+not', never the equality operators.
 
-    - Comparisons to singletons like None should always be done with
-      'is' or 'is not', never the equality operators.
+Also, beware of writing "if x" when you really mean "if x is not None" -- e.g.
+when testing whether a variable or argument that defaults to None was set to
+some other value.  The other value might have a type (such as a container) that
+could be false in a boolean context!
 
-      Also, beware of writing "if x" when you really mean "if x is not None"
-      -- e.g. when testing whether a variable or argument that defaults to
-      None was set to some other value.  The other value might have a type
-      (such as a container) that could be false in a boolean context!
+### Use class-based exceptions ###
 
-    - Use class-based exceptions.
+String exceptions in new code are forbidden, because this language feature is
+being removed in Python 2.6.
 
-      String exceptions in new code are forbidden, because this language
-      feature is being removed in Python 2.6.
-
-      Modules or packages should define their own domain-specific base
-      exception class, which should be subclassed from the built-in Exception
-      class.  Always include a class docstring.  E.g.:
+Modules or packages should define their own domain-specific base exception
+class, which should be subclassed from the built-in Exception class.  Always
+include a class docstring.  E.g.:
 
 ```python
 class MessageError(Exception):
   """Base class for errors in the email package."""
 ```
 
-      Class naming conventions apply here, although you should add the suffix
-      "Error" to your exception classes, if the exception is an error.
-      Non-error exceptions need no special suffix.
+Class naming conventions apply here, although you should add the suffix
+"Error" to your exception classes, if the exception is an error.
+Non-error exceptions need no special suffix.
 
-    - When raising an exception, use "raise !ValueError('message')" instead of
-      the older form "raise !ValueError, 'message'".
+When raising an exception, use "raise !ValueError('message')" instead of
+the older form "raise !ValueError, 'message'".
 
-      The paren-using form is preferred because when the exception arguments
-      are long or include string formatting, you don't need to use line
-      continuation characters thanks to the containing parentheses.
+The paren-using form is preferred because when the exception arguments
+are long or include string formatting, you don't need to use line
+continuation characters thanks to the containing parentheses.
 
-    - When catching exceptions, mention specific exceptions
-      whenever possible instead of using a bare 'except:' clause.
+When catching exceptions, mention specific exceptions
+whenever possible instead of using a bare 'except:' clause.
 
-      For example, use:
+For example, use:
 
 ```python
 try:
@@ -707,27 +704,26 @@ except ImportError:
   platform_specific_module = None 
 ```
 
-      A bare 'except:' clause will catch !SystemExit and !KeyboardInterrupt
-      exceptions, making it harder to interrupt a program with Control-C,
-      and can disguise other problems.  If you want to catch all
-      exceptions that signal program errors, use 'except Exception:'.
+A bare 'except:' clause will catch !SystemExit and !KeyboardInterrupt
+exceptions, making it harder to interrupt a program with Control-C,
+and can disguise other problems.  If you want to catch all
+exceptions that signal program errors, use 'except Exception:'.
 
-      A good rule of thumb is to limit use of bare 'except' clauses to two 
-      cases:
+A good rule of thumb is to limit use of bare 'except' clauses to two 
+cases:
 
-         1) If the exception handler will be printing out or logging
-            the traceback; at least the user will be aware that an
-            error has occurred.  
+1) If the exception handler will be printing out or logging the traceback; at
+least the user will be aware that an error has occurred.  
 
-         2) If the code needs to do some cleanup work, but then lets
-            the exception propagate upwards with 'raise'.
-            'try...finally' is a better way to handle this case.
+2) If the code needs to do some cleanup work, but then lets the exception
+propagate upwards with 'raise'.  'try...finally' is a better way to handle this
+case.
 
-    - Additionally, for all try/except clauses, limit the 'try' clause
-      to the absolute minimum amount of code necessary.  Again, this
-      avoids masking bugs.
+Additionally, for all try/except clauses, limit the 'try' clause
+to the absolute minimum amount of code necessary.  Again, this
+avoids masking bugs.
 
-      Yes:
+  Yes:
 
 ```python
 try:
@@ -738,7 +734,7 @@ else:
   return handle_value(value)
 ```
 
-      No:
+  No:
 
 ```python
 try:
@@ -751,135 +747,148 @@ except KeyError:
 
 
 
-    - Use {{{assert}}} sparingly.   
+Use {{{assert}}} sparingly.   
 
-      Assert has some tricky semantics because it is a statement, not a function.   Thus you cannot call assert with a string to raise in the logical way
+Assert has some tricky semantics because it is a statement, not a
+function.   Thus you cannot call assert with a string to raise in the
+logical way
 
-{{{
+```python
 assert(x = y, 'x and y must be equal')   # BAD CODE
-}}}
+```
 
-The above code will actually always be True because the tuple (bool, 'string') is True.
+The above code will actually always be True because the tuple (bool, 'string')
+is True.
 
-      You should use assertions only when it is truly and internal error (i.e. somewhere it should be impossible to reach.   Even so, it is fine to log / exitall instead.
+You should use assertions only when it is truly and internal error (i.e.
+somewhere it should be impossible to reach.   Even so, it is fine to log
+/ exitall instead.
 
 
+Use string methods instead of the string module.
 
-    - Use string methods instead of the string module.
+String methods are always much faster and share the same API with
+unicode strings.  Override this rule if backward compatibility with
+Pythons older than 2.0 is required.
 
-      String methods are always much faster and share the same API with
-      unicode strings.  Override this rule if backward compatibility with
-      Pythons older than 2.0 is required.
+Use ''.startswith() and ''.endswith() instead of string slicing to check
+for prefixes or suffixes.
 
-    - Use ''.startswith() and ''.endswith() instead of string slicing to check
-      for prefixes or suffixes.
+startswith() and endswith() are cleaner and less error prone.  For
+example:
 
-      startswith() and endswith() are cleaner and less error prone.  For
-      example:
-
-        Yes: 
+  Yes: 
 
 ```python
 if foo.startswith('bar'):
 ```
 
-        No:  
+  No:  
 
 ```python
 if foo[:3] == 'bar':
 ```
 
-    - Object type comparisons should always use isinstance() instead
-      of comparing types directly.
+Object type comparisons should always use isinstance() instead
+of comparing types directly.
 
-        Yes: 
+  Yes: 
 
 ```python
 if isinstance(obj, int):
 ```
 
-        No:  
+  No:  
 
 ```python
 if type(obj) is type(1):
 ```
 
-      When checking if an object is a string, keep in mind that it might be a
-      unicode string too!  In Python 2.3, str and unicode have a common base
-      class, basestring, so you can do:
+When checking if an object is a string, keep in mind that it might be a
+unicode string too!  In Python 2.3, str and unicode have a common base
+class, basestring, so you can do:
 
 ```python
 if isinstance(obj, basestring):
 ```
 
-      The types module has the !StringTypes type defined for that purpose, e.g.:
+The types module has the !StringTypes type defined for that purpose, e.g.:
 
 ```python
 import types
 if isinstance(obj, types.StringTypes):
 ```
 
-    - For sequences, (strings, lists, tuples), use the fact that empty
-      sequences are false.
+For sequences, (strings, lists, tuples), use the fact that empty
+sequences are false.
 
-      Yes: 
+  Yes: 
 
 ```python
 if not seq:
 if seq:
 ```
 
-      No: 
+  No: 
 
 ```python
 if len(seq)
 if not len(seq)
 ```
 
-    - Don't write string literals that rely on significant trailing
-      whitespace.  Such trailing whitespace is visually indistinguishable and
-      some editors (or more recently, reindent.py) will trim them.
+Don't write string literals that rely on significant trailing whitespace.  Such
+trailing whitespace is visually indistinguishable and some editors (or more
+recently, reindent.py) will trim them.
 
-    - Don't compare boolean values to True or False using ==
+Don't compare boolean values to True or False using ==
 
-        Yes:   
+Yes:   
 
 ```python
 if greeting:
 ```
 
-        No:    
+No:    
 
 ```python
 if greeting == True:
 ```
 
-        Worse: 
+Worse: 
 
 ```python
 if greeting is True:
 ```
 
-      However, there are a few cases where a function may return True, False, or other values.   In these cases, checking if a value with an unknown type is True or False, is allowed.
+However, there are a few cases where a function may return True, False, or
+other values.   In these cases, checking if a value with an unknown type is
+True or False, is allowed.
 
-    - Use the % string formatting operator only when necessary
+Use the % string formatting operator only when necessary
 
-      The string formatting operator '%' provides a convenient way to do printf like substitution of variables in strings.  It's better in many cases to put variables in line when you don't need the more advanced options (like fixed length fields).  The issue is that the string formatting operator makes understanding the output difficult in many cases.   For example in the following example, it's difficult to read the code and determine what the resulting output will look like:
+The string formatting operator '%' provides a convenient way to do printf like
+substitution of variables in strings.  It's better in many cases to put
+variables in line when you don't need the more advanced options (like fixed
+length fields).  The issue is that the string formatting operator makes
+understanding the output difficult in many cases.   For example in the
+following example, it's difficult to read the code and determine what the
+resulting output will look like:
 
 ```python
 print "python %s %s %s/vesselinfodir/ %s/ > /tmp/carter.out 2> /tmp/carter.err"%(carter_script, dist_char, prefix,prefix)
 ```
 
-      A better way to write this:
+A better way to write this:
 
 ```python
 print "python "+carter_script+" "+dist_char+" "+prefix+"/vesselinfodir/ "+prefix+"/ > /tmp/carter.out 2> /tmp/carter.err"
 ```
 
 
-   - Use else statements for handling errors, not for normal flow in most cases.
+Use else statements for handling errors, not for normal flow in most cases.
 
-For example, if you have a function that is supposed to take a positive integer argument, don't do the following:
+For example, if you have a function that is supposed to take a positive integer
+argument, don't do the following:
 
 ```python
 if x > 0:
@@ -888,7 +897,8 @@ else: # x must be 0
    ...
 ```
 
-It may be the case that x is negative, a different type, etc.   Instead do the following:
+It may be the case that x is negative, a different type, etc.   Instead do the
+following:
 
 
 ```python
@@ -901,60 +911,59 @@ else:
 ```
 
 
+## Potpourri ##
+
+Unix not Windows style text files.
+
+If you develop on Windows make sure you use dos2unix before checking in.
 
 
- ## Potpourri ##
-
-    Unix not Windows style text files.
-
-      If you develop on Windows make sure you use dos2unix before checking in.
+### Avoid objects ###
 
 
-
-
-    Avoid objects
-
-
-      Objects are a terrific programming tool when used correctly, but make code 
-      nearly unreadable when used poorly.   Unfortunately, even experienced developers 
-      have a hard time knowing how to correctly use objects.   About 80% of the code one 
-      could write is equally good with and without objects.   10% is easier with objects 
-      and 10% is easier without them.   Seattle code should use objects only in very 
-      rare cases.   The 90% of the code where objects can be avoided without significant 
-      impact, should be written without objects.
+Objects are a terrific programming tool when used correctly, but make code
+nearly unreadable when used poorly.   Unfortunately, even experienced
+developers have a hard time knowing how to correctly use objects.   About 80%
+of the code one could write is equally good with and without objects.   10% is
+easier with objects and 10% is easier without them.   Seattle code should use
+objects only in very rare cases.   The 90% of the code where objects can be
+avoided without significant impact, should be written without objects.
 
 
 
-    No lambda functions or lisp-esque code
+### No lambda functions or lisp-esque code ###
 
-      Don't use lambda functions.   Don't use map, flatten, etc.   It's best not to use 
-      these functions and to write longer code that produces the same result instead 
-      because using these functions makes your code very dense and difficult to read.
+Don't use lambda functions.   Don't use map, flatten, etc.   It's best
+not to use these functions and to write longer code that produces the
+same result instead because using these functions makes your code very
+dense and difficult to read.
 
-      Do not use syntax like:
+Do not use syntax like:
 
 ```python
 must_testy = [must_test(line) for line in changed.split("\n")]
 ```
 
 
-    Write test cases
+### Write test cases ###
 
-      Since you're going to test your module anyways before integrating it 
-      into the rest of Seattle (right?), it makes sense to do it in a reusable way.   
-      This way when you make changes later, you can immediately test to see if anything 
-      is broken.
+Since you're going to test your module anyways before integrating it into the
+rest of Seattle (right?), it makes sense to do it in a reusable way.   This way
+when you make changes later, you can immediately test to see if anything is
+broken.
 
-      Write 90% tests.   The test should make sure that it will catch 90% of the 
-      potential problems with the function.   Avoid writing 50% tests (that only 
-      check a common case or two) and avoid writing 99.9% tests because it will 
-      consume too much of your time.
+Write 90% tests.   The test should make sure that it will catch 90% of the
+potential problems with the function.   Avoid writing 50% tests (that only
+check a common case or two) and avoid writing 99.9% tests because it will
+consume too much of your time.
 
-      All "external" functions '''must''' be tested.   Internal functions (starting with {{{__}}}) are up to your discretion.
+All "external" functions '''must''' be tested.   Internal functions (starting
+with `__`) are up to your discretion.
 
-    Never use short circuit evaluation to produce output
+    
+### Never use short circuit evaluation to produce output
 
-      No:
+  No:
 
 ```python
 if synched or askokcancel("Change slice without synching?", "You
@@ -966,7 +975,7 @@ else:
   # else clause
 ```
 
-      Yes:
+  Yes:
 
 ```python
 if not synched:
@@ -981,7 +990,7 @@ else:
   #then clause
 ```
 
-     or if the then and else clauses are large write:
+or if the then and else clauses are large write:
 
 ```python
 if not synched:
@@ -998,27 +1007,32 @@ else:
   #else clause
 ```
 
-     Writing the code the first way is hard for someone to read.   The
-     second two ways make it more clear that you are relying on the short
-     circuit evaluation to perform or avoid the evaluation of the
-     askokcancel function.
+Writing the code the first way is hard for someone to read.   The second two
+ways make it more clear that you are relying on the short circuit evaluation to
+perform or avoid the evaluation of the askokcancel function.
 
 
-    Don't use os.popen or os.system
+Don't use os.popen or os.system
 
-     These are deprecated and we've found bugs in them.   Don't use them!   Use subprocess instead.
+These are deprecated and we've found bugs in them.   Don't use them!   Use
+subprocess instead.
 
-    Don't use subprocess.Popen with a string argument (#508).
+Don't use subprocess.Popen with a string argument (#508).
 
-     Call subprocess.Popen with a first argument that looks like ['command', 'arg1', 'arg2', ...].   Do not use 'command arg1 arg2 ...'!
+Call subprocess.Popen with a first argument that looks like ['command', 'arg1',
+'arg2', ...].   Do not use 'command arg1 arg2 ...'!
 
 
-    Avoid changing directory (#487).
-     
-     Changing the current directory can cause multithreaded programs to break is scary ways and is usually an indication of bad programming style.   Don't do it!
+Avoid changing directory (#487).
 
-    Don't use mutable objects as argument defaults (#828).
+Changing the current directory can cause multithreaded programs to break is
+scary ways and is usually an indication of bad programming style.   Don't do
+it!
 
-     If they are modified in the function (or returned and modified outside of the function), the changes persist to future function calls.
-     If you want the default of an empty list or dict, for example, use a default of None and then check for this value in the function and
-     assign an empty list/dict inside the function.
+Don't use mutable objects as argument defaults (#828).
+
+If they are modified in the function (or returned and modified outside of the
+function), the changes persist to future function calls.  If you want the
+default of an empty list or dict, for example, use a default of None and then
+check for this value in the function and assign an empty list/dict inside the
+function.
