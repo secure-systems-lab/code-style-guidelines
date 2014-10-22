@@ -930,7 +930,6 @@ objects only in very rare cases.   The 90% of the code where objects can be
 avoided without significant impact, should be written without objects.
 
 
-
 ### No lambda functions or lisp-esque code ###
 
 Don't use lambda functions.   Don't use map, flatten, etc.   It's best
@@ -1012,24 +1011,24 @@ ways make it more clear that you are relying on the short circuit evaluation to
 perform or avoid the evaluation of the askokcancel function.
 
 
-Don't use os.popen or os.system
+### Don't use os.popen or os.system ###
 
   These are deprecated and we've found bugs in them.   Don't use them!   Use
   subprocess instead.
 
-Don't use subprocess.Popen with a string argument (#508).
+### Don't use subprocess.Popen with a string argument (#508) ###
 
   Call subprocess.Popen with a first argument that looks like ['command',
   'arg1', 'arg2', ...].   Do not use 'command arg1 arg2 ...'!
 
 
-Avoid changing directory (#487).
+### Avoid changing directory (#487) ###
 
   Changing the current directory can cause multithreaded programs to break is
   scary ways and is usually an indication of bad programming style.   Don't do
   it!
 
-Don't use mutable objects as argument defaults (#828).
+### Don't use mutable objects as argument defaults (#828) ###
 
   If they are modified in the function (or returned and modified outside of the
   function), the changes persist to future function calls.  If you want the
