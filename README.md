@@ -68,18 +68,17 @@ class Rectangle(Blob):
     Use blank lines in functions to indicate logical sections and help to offset comments.
 
 
-[[BR]]
-== Imports ==
-----
+
+## Imports ##
 
     - Imports should usually be on separate lines, e.g.:
 
         Yes: 
-{{{
-#!python
+
+```python
 import os
 import sys
-}}}
+```
 
         No:  
 {{{
@@ -90,22 +89,21 @@ import sys, os
     - It is preferable to import an entire module than items from the module
 
         Yes:
-{{{
-#!python
+
+```python
 import subprocess
-}}}
+```
 
         No: 
-{{{
-#!python
+
+```python
 from subprocess import Popen, PIPE
-}}}
+```
 
         Definitely Not: 
-{{{
-#!python
+```python
 from subprocess import *
-}}}
+```
         An exception to the last rule is when you must import items in a specific way for repy portability.
 
     - Imports are always put at the top of the file, just after any module
@@ -120,9 +118,7 @@ from subprocess import *
 
 
 
-[[BR]]
-== Whitespace in Expressions and Statements ==
-----
+## Whitespace in Expressions and Statements ##
 
   Pet Peeves
 
@@ -131,75 +127,67 @@ from subprocess import *
     - Immediately inside parentheses, brackets or braces.
 
       Yes: 
-{{{
-#!python
+```python
 spam(ham[1], {eggs: 2})
-}}}
+```
       No:  
-{{{
-#!python
+
+```python
 spam( ham[ 1 ], { eggs: 2 } )
-}}}
+```
 
     - Immediately before a comma, semicolon, or colon:
 
       Yes: 
-{{{
-#!python
+```python
 if x == 4: print x, y; x, y = y, x
-}}}
+```
       No:  
-{{{
-#!python
+```python
 if x == 4 : print x , y ; x , y = y , x
-}}}
+```
 
     - Immediately before the open parenthesis that starts the argument
       list of a function call:
 
       Yes: 
-{{{
-#!python
+```python
 spam(1)
-}}}
+```
       No:  
-{{{
-#!python
+```python
 spam (1)
-}}}
+```
 
     - Immediately before the open brackets that starts an indexing or
       slicing:
 
       Yes: 
-{{{
-#!python
+```python
 dict['key'] = list[index]
-}}}
+```
       No:  
-{{{
-#!python
+```python
 dict ['key'] = list [index]
-}}}
+```
 
     - More than one space around an assignment (or other) operator to
       align it with another.
 
       Yes:
-{{{
-#!python
+
+```python
 x = 1
 y = 2
 long_variable = 3
-}}}
+```
 
       No:
-{{{
-#!python
+```python
 x             = 1
 y             = 2
 long_variable = 3
-}}}
+```
 
 
   Other Recommendations
@@ -212,48 +200,45 @@ long_variable = 3
     - Use spaces around arithmetic operators:
 
       Yes:
-{{{
-#!python
+```python
 i = i + 1
 submitted += 1
 x = x * 2 - 1
 hypot2 = x * x + y * y
 c = (a + b) * (a - b)
-}}}
+```
 
       Maybe not:
-{{{
-#!python
+```python
 i=i+1
 submitted +=1
 x = x*2 - 1
 hypot2 = x*x + y*y
 c = (a+b) * (a-b)
-}}}
+```
 
     - Compound statements (multiple statements on the same line) are
       not allowed.
 
       Yes:
-{{{
-#!python
+
+```python
 if foo == 'blah':
   do_blah_thing()
 do_one()
 do_two()
 do_three()
-}}}
+```
 
       No:
-{{{
-#!python
+
+```python
 if foo == 'blah': do_blah_thing()
 do_one(); do_two(); do_three()
-}}}
+```
 
       Definitely not:
-{{{
-#!python
+```python
 if foo == 'blah': do_blah_thing()
 else: do_non_blah_thing()
 
@@ -264,11 +249,9 @@ do_one(); do_two(); do_three(long, argument,
     list, like, this)
 
 if foo == 'blah': one(); two(); three()
-}}}
+```
 
-[[BR]]
-== Comments ==
-----
+## Comments ##
 
     Comments that contradict the code are worse than no comments.  Always make
     a priority of keeping the comments up-to-date when the code changes!
@@ -308,16 +291,16 @@ if foo == 'blah': one(); two(); three()
 
     Inline comments are unnecessary and in fact distracting if they state
     the obvious.  Don't do this:
-{{{
-#!python
+
+```python
 x = x + 1                 # Increment x
-}}}
+```
 
     But sometimes, this is useful:
-{{{
-#!python
+
+```python
 x = x + 1                 # Compensate for border
-}}}
+```
 
 
 
@@ -336,22 +319,21 @@ x = x + 1                 # Compensate for border
     change.  
 
     old code:
-{{{
-#!python
+
+```python
 for line in file("foo"):
   print line.split()[1]
-}}}
+```
 
     new code:
-{{{
-#!python
+```python
 for line in file("foo"):
   # JAC: Need to check if there is a second word, if not then we
   # can skip the line because it isn't relevant to the output.   
   # Prior code threw an IndexError in this case.
   if len(line.split()) > 2:
     print line.split()[1]
-}}}
+```
 
     Now when someone reads the new code they can understand why you
     changed what you did.   If the original author reads your updated 
