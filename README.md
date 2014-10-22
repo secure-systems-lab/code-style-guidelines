@@ -1,6 +1,11 @@
 # Code Style Guidelines #
 
-These guidelines provide examples about what to do (or not to do) when writing code for projects at the Secure Systems Lab.   These are based upon Justin's experiences working with Stork, [Guido van Rossom's](http://www.python.org/dev/peps/pep-0008/) Python style guidelines, and the experiences and suggestions of team members.   Please give Justin feedback if there is anything you'd like to change.
+These guidelines provide examples about what to do (or not to do) when writing
+code for projects at the Secure Systems Lab.   These are based upon Justin's
+experiences working with Stork, [Guido
+vanRossom's](http://www.python.org/dev/peps/pep-0008/) Python style guidelines,
+and the experiences and suggestions of team members.   Please give Justin
+feedback if there is anything you'd like to change.
 
 ## Table of Contents ##
 - [Code Lay-out](#code-lay-out)
@@ -13,13 +18,24 @@ These guidelines provide examples about what to do (or not to do) when writing c
 - [Potpourri](#potpourri)
 
 
-One of Guido's key insights in building Python is that code is read much more often than it is written.  The guidelines provided here are intended to improve the readability of code and make it consistent across the wide spectrum of Python code.  The primary goal of the code we write for Seattle is '''readability'''.   The other features that your code must have are security, correctness, and robustness (notice that performance is not listed).   The purpose of this document is to help to improve the readability of Seattle code (which I believe strongly impacts the security, correctness, and robustness).   
+One of Guido's key insights in building Python is that code is read much more
+often than it is written.  The guidelines provided here are intended to improve
+the readability of code and make it consistent across the wide spectrum of
+Python code.  The primary goal of the code we write for Seattle is
+*readability*.   The other features that your code must have are security,
+correctness, and robustness (notice that performance is not listed).   The
+purpose of this document is to help to improve the readability of Seattle code
+(which I believe strongly impacts the security, correctness, and robustness).   
 
 
-A style guide is about consistency.  Consistency within a project is very important and since we're writing basically all of the code ourselves, there should be little reason for inconsistency.  
+A style guide is about consistency.  Consistency within a project is very
+important and since we're writing basically all of the code ourselves, there
+should be little reason for inconsistency.  
 
 
-There is only one good reason to break a rule in the style guideline and that's when applying the rule would make the code less readable, even for someone who is used to reading code that follows the rules.
+There is only one good reason to break a rule in the style guideline and that's
+when applying the rule would make the code less readable, even for someone who
+is used to reading code that follows the rules.
 
 ## Code lay-out ##
 
@@ -33,14 +49,18 @@ Never use tabs to indent project code.   There should be no tabs in Seattle code
 
 ### Maximum Line Length ###
 
-  Try to limit most lines to a maximum of 79 characters.   This certainly should be done for comments, but use    common sense when applying this rule to code!   I've seen developers who have a highly indented loop wrap a     relatively short line across three separate lines to try to avoid going over 80 characters (don't do it!).
+Try to limit most lines to a maximum of 79 characters.   This certainly
+should be done for comments, but use    common sense when applying this rule
+to code!   I've seen developers who have a highly indented loop wrap a
+relatively short line across three separate lines to try to avoid going over
+80 characters (don't do it!).
 
-  The preferred way of wrapping long lines is by using Python's implied line
-  continuation inside parentheses, brackets and braces.  If necessary, you
-  can add an extra pair of parentheses around an expression, but sometimes
-  using a backslash looks better.  Make sure to indent the continued line
-  appropriately.  The preferred place to break around a binary operator is
-  *after* the operator, not before it.  Some examples:
+The preferred way of wrapping long lines is by using Python's implied line
+continuation inside parentheses, brackets and braces.  If necessary, you
+can add an extra pair of parentheses around an expression, but sometimes
+using a backslash looks better.  Make sure to indent the continued line
+appropriately.  The preferred place to break around a binary operator is
+*after* the operator, not before it.  Some examples:
 
 ```python
 class Rectangle(Blob):
@@ -58,14 +78,14 @@ class Rectangle(Blob):
         color, emphasis, highlight)
 ```
 
-  Blank Lines
+### Blank Lines ###
 
-    Separate top-level function and class definitions with at least 5 blank lines.
+Separate top-level function and class definitions with at least 5 blank lines.
 
-    Method definitions inside a class are separated by at least 2 blank lines.
+Method definitions inside a class are separated by at least 2 blank lines.
 
-    Use blank lines in functions to indicate logical sections and help to offset comments.
-
+Use blank lines in functions to indicate logical sections and help to offset
+comments.
 
 
 ## Imports ##
@@ -83,95 +103,103 @@ import sys
 import sys, os
 ```
 
-    - It is preferable to import an entire module than items from the module
+It is preferable to import an entire module than items from the module
 
-        Yes:
+  Yes:
 
 ```python
 import subprocess
 ```
 
-        No: 
+  No: 
 
 ```python
 from subprocess import Popen, PIPE
 ```
 
-        Definitely Not: 
+  Definitely Not: 
 ```python
 from subprocess import *
 ```
-        An exception to the last rule is when you must import items in a specific way for repy portability.
 
-    - Imports are always put at the top of the file, just after any module
-      comments and docstrings, and before module globals and constants.
+An exception to the last rule is when you must import items in a specific way
+for repy portability.
 
-    - Always use the absolute package path for all imports.
+Imports are always put at the top of the file, just after any module
+comments and docstrings, and before module globals and constants.
+
+Always use the absolute package path for all imports.
 
 
-    - '''Avoid circular imports'''.   This is where {{{a.py}}} imports {{{b.py}}} and then either {{{b.py}}} or a path of imports from {{{b.py}}} imports {{{a.py}}}.   This does really odd things to Python, in particular if you perform any actions during import.
+*Avoid circular imports*.   This is where `a.py` imports `b.py` and
+then either `b.py` or a path of imports from `b.py` imports `a.py`.
+This does really odd things to Python, in particular if you perform any actions
+during import.
 
-    - Try to avoid performing actions on module import.   This doesn't play well with circular imports and is non-intuitive for most programmers.
-
+Try to avoid performing actions on module import.   This doesn't play well with
+circular imports and is non-intuitive for most programmers.
 
 
 ## Whitespace in Expressions and Statements ##
 
-  Pet Peeves
+### Pet Peeves ###
 
-    Avoid extraneous whitespace in the following situations:
+Avoid extraneous whitespace in the following situations:
 
-    - Immediately inside parentheses, brackets or braces.
+Immediately inside parentheses, brackets or braces.
 
-      Yes: 
+  Yes: 
 ```python
 spam(ham[1], {eggs: 2})
 ```
-      No:  
+  
+  No:  
 
 ```python
 spam( ham[ 1 ], { eggs: 2 } )
 ```
 
-    - Immediately before a comma, semicolon, or colon:
+Immediately before a comma, semicolon, or colon:
 
-      Yes: 
+  Yes: 
 ```python
 if x == 4: print x, y; x, y = y, x
 ```
-      No:  
+
+  No:  
 ```python
 if x == 4 : print x , y ; x , y = y , x
 ```
 
-    - Immediately before the open parenthesis that starts the argument
-      list of a function call:
+Immediately before the open parenthesis that starts the argument
+list of a function call:
 
-      Yes: 
+  Yes: 
 ```python
 spam(1)
 ```
-      No:  
+
+  No:  
 ```python
 spam (1)
 ```
 
-    - Immediately before the open brackets that starts an indexing or
-      slicing:
+Immediately before the open bracket that starts an indexing or slicing:
 
-      Yes: 
+  Yes: 
 ```python
 dict['key'] = list[index]
 ```
-      No:  
+
+  No:  
 ```python
 dict ['key'] = list [index]
 ```
 
-    - More than one space around an assignment (or other) operator to
-      align it with another.
+More than one space around an assignment (or other) operator to align it with
+another.
 
-      Yes:
+  Yes:
 
 ```python
 x = 1
@@ -179,7 +207,7 @@ y = 2
 long_variable = 3
 ```
 
-      No:
+  No:
 ```python
 x             = 1
 y             = 2
@@ -187,16 +215,15 @@ long_variable = 3
 ```
 
 
-  Other Recommendations
+### Other Recommendations ###
 
-    - Always surround these binary operators with a single space on
-      either side: assignment (=), augmented assignment (+=, -= etc.),
-      comparisons (==, <, >, !=, <>, <=, >=, in, not in, is, is not),
-      Booleans (and, or, not).
+Always surround these binary operators with a single space on either side:
+assignment (=), augmented assignment (+=, -= etc.), comparisons (==, <, >, !=,
+<>, <=, >=, in, not in, is, is not), Booleans (and, or, not).
 
-    - Use spaces around arithmetic operators:
+Use spaces around arithmetic operators:
 
-      Yes:
+  Yes:
 ```python
 i = i + 1
 submitted += 1
@@ -205,7 +232,7 @@ hypot2 = x * x + y * y
 c = (a + b) * (a - b)
 ```
 
-      Maybe not:
+Maybe not:
 ```python
 i=i+1
 submitted +=1
@@ -214,10 +241,9 @@ hypot2 = x*x + y*y
 c = (a+b) * (a-b)
 ```
 
-    - Compound statements (multiple statements on the same line) are
-      not allowed.
+Compound statements (multiple statements on the same line) are not allowed.
 
-      Yes:
+  Yes:
 
 ```python
 if foo == 'blah':
@@ -227,14 +253,14 @@ do_two()
 do_three()
 ```
 
-      No:
+  No:
 
 ```python
 if foo == 'blah': do_blah_thing()
 do_one(); do_two(); do_three()
 ```
 
-      Definitely not:
+  Definitely not:
 ```python
 if foo == 'blah': do_blah_thing()
 else: do_non_blah_thing()
@@ -248,52 +274,54 @@ do_one(); do_two(); do_three(long, argument,
 if foo == 'blah': one(); two(); three()
 ```
 
+
 ## Comments ##
 
-    Comments that contradict the code are worse than no comments.  Always make
-    a priority of keeping the comments up-to-date when the code changes!
+Comments that contradict the code are worse than no comments.  Always make a
+priority of keeping the comments up-to-date when the code changes!
 
-    Comments should be complete sentences.  If a comment is a phrase or
-    sentence, its first word should be capitalized, unless it is an identifier
-    that begins with a lower case letter (never alter the case of
-    identifiers!).
+Comments should be complete sentences.  If a comment is a phrase or sentence,
+its first word should be capitalized, unless it is an identifier that begins
+with a lower case letter (never alter the case of identifiers!).
 
-    If a comment is short, the period at the end can be omitted.  Block
-    comments generally consist of one or more paragraphs built out of complete
-    sentences, and each sentence should end in a period.
+If a comment is short, the period at the end can be omitted.  Block comments
+generally consist of one or more paragraphs built out of complete sentences,
+and each sentence should end in a period.
 
-    You should use two spaces after a sentence-ending period.
+You should use two spaces after a sentence-ending period.
 
-    When writing English, Strunk and White apply.   This means you shouldn't have spelling or
-    grammar errors.   It also helps to make the project's code look more professional.
+When writing English, Strunk and White apply.   This means you shouldn't have
+spelling or grammar errors.   It also helps to make the project's code look
+more professional.
 
-  Block Comments
+### Block Comments ###
 
-    Block comments generally apply to some (or all) code that follows them,
-    and are indented to the same level as that code.  Each line of a block
-    comment starts with a # and a single space (unless it is indented text
-    inside the comment).
+Block comments generally apply to some (or all) code that follows them,
+and are indented to the same level as that code.  Each line of a block
+comment starts with a # and a single space (unless it is indented text
+inside the comment).
 
-    Paragraphs inside a block comment are separated by a line containing a
-    single #.
-
-  Inline Comments
-
-    Use inline comments very sparingly.
-
-    An inline comment is a comment on the same line as a statement.  Inline
-    comments should be separated by at least two spaces from the statement.
-    They should start with a # and a single space.
+Paragraphs inside a block comment are separated by a line containing a
+single #.
 
 
-    Inline comments are unnecessary and in fact distracting if they state
-    the obvious.  Don't do this:
+### Inline Comments ###
+
+Use inline comments very sparingly.
+
+An inline comment is a comment on the same line as a statement.  Inline
+comments should be separated by at least two spaces from the statement.
+They should start with a # and a single space.
+
+
+Inline comments are unnecessary and in fact distracting if they state
+the obvious.  Don't do this:
 
 ```python
 x = x + 1                 # Increment x
 ```
 
-    But sometimes, this is useful:
+But sometimes, this is useful:
 
 ```python
 x = x + 1                 # Compensate for border
@@ -301,28 +329,29 @@ x = x + 1                 # Compensate for border
 
 
 
+### Purpose of Comments ###
 
-  Purpose of Comments
+Comments should give the reader the context for why you are performing a
+specific action and indicate authorship and mindset.
 
-    Comments should give the reader the context for why you are performing a specific action and indicate authorship and mindset.
+It is very important that when you change code you didn't write you comment the
+change.   I've spent days looking for bugs that people introduced because they
+changed code they thought they understood.  '''Any time you make changes to a
+module or function you didn't write, use your initials in a comment describing
+the scope and purpose of the change.'''
 
-    It is very important that when you change code you didn't write you
-    comment the change.   I've spent days looking for bugs that people
-    introduced because they changed code they thought they understood.
-    '''Any time you make changes to a module or function you didn't write, use
-    your initials in a comment describing the scope and purpose of the change.'''
+Use the comment to explain what you are thinking when you make the
+change.  
 
-    Use the comment to explain what you are thinking when you make the
-    change.  
-
-    old code:
+old code:
 
 ```python
 for line in file("foo"):
   print line.split()[1]
 ```
 
-    new code:
+new code:
+
 ```python
 for line in file("foo"):
   # JAC: Need to check if there is a second word, if not then we
@@ -332,54 +361,57 @@ for line in file("foo"):
     print line.split()[1]
 ```
 
-    Now when someone reads the new code they can understand why you
-    changed what you did.   If the original author reads your updated 
-    code, they can tell if you misunderstood their code and easily fix 
-    it (but if you misunderstood the code, this is a hint it needs better comments).
+Now when someone reads the new code they can understand why you changed what
+you did.   If the original author reads your updated code, they can tell if you
+misunderstood their code and easily fix it (but if you misunderstood the code,
+this is a hint it needs better comments).
 
-    If you spend time struggling to understand something in code, it is 
-    useful to put a comment indicating you find it unclear but you *think* 
-    this is what is intended.   This helps us to locate portions of the code 
-    that need to be cleaned up and also indicates "how" to clean the code.
-    
-  Comments should describe why you are performing an action, not what action you are performing.   
+If you spend time struggling to understand something in code, it is useful to
+put a comment indicating you find it unclear but you *think* this is what is
+intended.   This helps us to locate portions of the code that need to be
+cleaned up and also indicates "how" to clean the code.
 
-    No:
+Comments should describe why you are performing an action, not what action you
+are performing.   
+
+  No:
 ```python
 i = i + 2     # add 2 to i
 ```
 
-    Yes: 
+  Yes: 
 ```python
 i = i + 2     # skipping even numbers since even numbers > 2 are not prime
 ```
 
-    An exception to this rule is if you need to do some "magic operation" in the code.
+
+An exception to this rule is if you need to do some "magic operation" in the
+code.
+
 ```python
 # reuse the socket if it's recently been closed but is available 
 socketobj.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 ```
 
 
+### Hints for writing good comments ###
 
-  Hints for writing good comments
-
-    It is helpful many times to write comments as questions
+It is helpful many times to write comments as questions
 
 ```python
 # Is the file correctly signed?
 if (foo.bar(fn)):
 ```
 
+The "right time" to write comments is as you write the code 
+(sometimes I even write them before the code).   You will never 
+have a better understanding of the code than when you write it.
 
-    The "right time" to write comments is as you write the code 
-    (sometimes I even write them before the code).   You will never 
-    have a better understanding of the code than when you write it.
 
+If you are making assumptions then you should check that your 
+assumptions are valid.   If you can't test your assumptions then 
+at least comment your code
 
-    If you are making assumptions then you should check that your 
-    assumptions are valid.   If you can't test your assumptions then 
-    at least comment your code
 ```python
 total = 0
 for item in list:
@@ -388,33 +420,31 @@ for item in list:
 ```
 
 
-  Comment quantity
+### Comment quantity ###
 
-    There is no hard and fast rule for the number of comments a file 
-    should have.   However, one way to check it is to read only the 
-    comments (not the code).   If you could re-construct the code using 
-    only the comments, you are likely at the right level of comments.   
+There is no hard and fast rule for the number of comments a file 
+should have.   However, one way to check it is to read only the 
+comments (not the code).   If you could re-construct the code using 
+only the comments, you are likely at the right level of comments.   
 
-    Note that "well commented" modules may have more lines of comments 
-    than lines of code!  
-
-
+Note that "well commented" modules may have more lines of comments 
+than lines of code!  
 
 
 ## Documentation Strings ##
 
-    Conventions for writing good documentation strings (a.k.a. "docstrings")
-    are immortalized in [http://www.python.org/dev/peps/pep-0257/ PEP 257]
+Conventions for writing good documentation strings (a.k.a. "docstrings")
+are immortalized in [http://www.python.org/dev/peps/pep-0257/ PEP 257]
 
-    - Write docstrings for all public modules, functions, classes, and
-      methods.  Docstrings are not necessary for non-public methods, but you
-      should have a comment that describes what the method does.  This comment
-      should appear after the "def" line.
+Write docstrings for all public modules, functions, classes, and methods.
+Docstrings are not necessary for non-public methods, but you should have a
+comment that describes what the method does.  This comment should appear after
+the "def" line.
 
 
-    - Note that most
-      importantly, the """ that ends a multiline docstring should be on a line
-      by itself, and preferably preceded by a blank line, e.g.:
+Note that most importantly, the """ that ends a multiline docstring should be
+on a line by itself, and preferably preceded by a blank line, e.g.:
+
 ```python
 """Return a foobang
 
@@ -423,15 +453,15 @@ Optional plotz says to frobnicate the bizbaz first.
 """
 ```
 
-    - For one liner docstrings, it's okay to keep the closing """ on the same
-      line.
+For one liner docstrings, it's okay to keep the closing """ on the same
+line.
 
 
-   Example documentation strings for files, modules, and classes.
+Example documentation strings for files, modules, and classes.
 
-      Each file should have a header block that explains the purpose of the
-      module, when it was started, who wrote it (or made very substantial
-      revisions), and a list of any caveats or issues with the module.
+Each file should have a header block that explains the purpose of the
+module, when it was started, who wrote it (or made very substantial
+revisions), and a list of any caveats or issues with the module.
 
 ```python
 """
@@ -463,13 +493,12 @@ Optional plotz says to frobnicate the bizbaz first.
 """
 ```
 
-      Documentation strings are needed for every function in a module that 
-      will be called from other modules.   It is recommended to create comment 
-      blocks for long functions even if they are private to a module.   There are 5 main
-      parts of a function comment block: purpose, arguments, exceptions,
-      side effects, and return value.   The purpose is to specify everything someone
-      who calls your function needs to know (so they don't need to look at the code).
-      For example:
+Documentation strings are needed for every function in a module that will be
+called from other modules.   It is recommended to create comment blocks for
+long functions even if they are private to a module.   There are 5 main parts
+of a function comment block: purpose, arguments, exceptions, side effects, and
+return value.   The purpose is to specify everything someone who calls your
+function needs to know (so they don't need to look at the code).  For example:
 
 ```python
 def redirect_stdout(stream):
@@ -495,8 +524,8 @@ def redirect_stdout(stream):
   """
 ```
 
-      In general the use of classes is discouraged (link to below), but in the 
-      cases it is clear classes should be used, use the following format:
+In general the use of classes is discouraged (link to below), but in the cases
+it is clear classes should be used, use the following format:
 
 ```python
 class single_conn(Thread):
@@ -515,7 +544,8 @@ class single_conn(Thread):
   """   
 ```
 
-Classes that are used for exceptions can be written more succinctly (since the purpose, side effects, example use are obvious).
+Classes that are used for exceptions can be written more succinctly (since the
+purpose, side effects, example use are obvious).
 
 ```python
 class UserError(Exception):
@@ -526,20 +556,19 @@ class UserError(Exception):
 ## Naming Conventions ##
 
 
-  Descriptive Naming Styles
+### Descriptive Naming Styles ###
 
+Use descriptive variable and function names.
 
-    Use descriptive variable and function names.
+Put at least one adjective in each variable name like 'slicename' or
+'inputfileobj' or 'deststring'.   Also make sure that the type of the variable
+is readable by looking at the name.   Also, the word "file" is ambiguous, use
+fileobj or filename (fn is an acceptable abbreviation for filename).   
 
-      Put at least one adjective in each variable name like 'slicename' or 
-      'inputfileobj' or 'deststring'.   Also make sure that the type of the 
-      variable is readable by looking at the name.   Also, the word "file" is 
-      ambiguous, use fileobj or filename (fn is an acceptable abbreviation for 
-      filename).   
+These rules are especially important for function arguments or variables that
+have long lifespans.
 
-      These rules are especially important for function arguments or variables that have long lifespans.
-
-    Yes:
+  Yes:
 
 ```python
 inputfileobj = file(inputfn)   # fn is an acceptable abbreviation for file name
@@ -547,7 +576,7 @@ deststring = "abc" + currentstring
 slicename = "uw_seattle"
 ```
      
-    No:
+  No:
 
 ```python
 inobj = file(filename)
@@ -555,14 +584,14 @@ dest = "abc" + current
 name = "uw_seattle"
 ```
  
-    Definitely not:
+  Definitely not:
 
 ```python
 i = i + 1
 ```
 
-      The only case where it is okay to use single letter variable names is for arguments 
-      passed into a constructor or using e for an exception.   For example:
+The only case where it is okay to use single letter variable names is for
+arguments passed into a constructor or using e for an exception.   For example:
 
 ```python
 class foo:
