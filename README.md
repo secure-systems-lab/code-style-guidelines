@@ -22,7 +22,6 @@ A style guide is about consistency.  Consistency within a project is very import
 There is only one good reason to break a rule in the style guideline and that's when applying the rule would make the code less readable, even for someone who is used to reading code that follows the rules.
 
 ## Code lay-out ##
-----
 
   Indentation
 
@@ -71,20 +70,18 @@ class Rectangle(Blob):
 
 ## Imports ##
 
-    - Imports should usually be on separate lines, e.g.:
-
-        Yes: 
+Imports should usually be on separate lines, e.g.:
+  Yes: 
 
 ```python
 import os
 import sys
 ```
 
-        No:  
-{{{
-#!python
+  No:  
+```python
 import sys, os
-}}}
+```
 
     - It is preferable to import an entire module than items from the module
 
@@ -348,33 +345,31 @@ for line in file("foo"):
   Comments should describe why you are performing an action, not what action you are performing.   
 
     No:
-{{{
-#!python
+```python
 i = i + 2     # add 2 to i
-}}}
+```
+
     Yes: 
-{{{
-#!python
+```python
 i = i + 2     # skipping even numbers since even numbers > 2 are not prime
-}}}
+```
 
     An exception to this rule is if you need to do some "magic operation" in the code.
-{{{
-#!python
+```python
 # reuse the socket if it's recently been closed but is available 
 socketobj.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-}}}
+```
 
 
 
   Hints for writing good comments
 
     It is helpful many times to write comments as questions
-{{{
-#!python
+
+```python
 # Is the file correctly signed?
 if (foo.bar(fn)):
-}}}
+```
 
 
     The "right time" to write comments is as you write the code 
@@ -385,13 +380,12 @@ if (foo.bar(fn)):
     If you are making assumptions then you should check that your 
     assumptions are valid.   If you can't test your assumptions then 
     at least comment your code
-{{{
-#!python
+```python
 total = 0
 for item in list:
   # The list should contain only integers
   total = total + item
-}}}
+```
 
 
   Comment quantity
@@ -406,9 +400,8 @@ for item in list:
 
 
 
-[[BR]]
-== Documentation Strings ==
-----
+
+## Documentation Strings ##
 
     Conventions for writing good documentation strings (a.k.a. "docstrings")
     are immortalized in [http://www.python.org/dev/peps/pep-0257/ PEP 257]
@@ -422,14 +415,13 @@ for item in list:
     - Note that most
       importantly, the """ that ends a multiline docstring should be on a line
       by itself, and preferably preceded by a blank line, e.g.:
-{{{
-#!python
+```python
 """Return a foobang
 
 Optional plotz says to frobnicate the bizbaz first.
 
 """
-}}}
+```
 
     - For one liner docstrings, it's okay to keep the closing """ on the same
       line.
@@ -440,8 +432,8 @@ Optional plotz says to frobnicate the bizbaz first.
       Each file should have a header block that explains the purpose of the
       module, when it was started, who wrote it (or made very substantial
       revisions), and a list of any caveats or issues with the module.
-{{{
-#!python
+
+```python
 """
 <Program Name>
   storkreport.py
@@ -469,7 +461,7 @@ Optional plotz says to frobnicate the bizbaz first.
   On July 10th, 2007, Justin is doing a pretty substantial rewrite.   Blame
   him for any resulting cruft.
 """
-}}}
+```
 
       Documentation strings are needed for every function in a module that 
       will be called from other modules.   It is recommended to create comment 
@@ -478,8 +470,8 @@ Optional plotz says to frobnicate the bizbaz first.
       side effects, and return value.   The purpose is to specify everything someone
       who calls your function needs to know (so they don't need to look at the code).
       For example:
-{{{
-#!python
+
+```python
 def redirect_stdout(stream):
   """
   <Purpose>
@@ -501,12 +493,12 @@ def redirect_stdout(stream):
   <Returns>
     None.
   """
-}}}
+```
 
       In general the use of classes is discouraged (link to below), but in the 
       cases it is clear classes should be used, use the following format:
-{{{
-#!python
+
+```python
 class single_conn(Thread):
   """
   <Purpose>
@@ -521,18 +513,17 @@ class single_conn(Thread):
     # and disconnect without checking if they have said anything
     connection.disconnect()
   """   
-}}}
+```
 
 Classes that are used for exceptions can be written more succinctly (since the purpose, side effects, example use are obvious).
-{{{
-#!python
+
+```python
 class UserError(Exception):
   """This exception indicates the user provided us with bad input"""
-}}}
+```
 
-[[BR]]
-== Naming Conventions ==
-----
+
+## Naming Conventions ##
 
 
   Descriptive Naming Styles
@@ -549,31 +540,31 @@ class UserError(Exception):
       These rules are especially important for function arguments or variables that have long lifespans.
 
     Yes:
-{{{
-#!python
+
+```python
 inputfileobj = file(inputfn)   # fn is an acceptable abbreviation for file name
 deststring = "abc" + currentstring
 slicename = "uw_seattle"
-}}}
+```
      
     No:
-{{{
-#!python
+
+```python
 inobj = file(filename)
 dest = "abc" + current
 name = "uw_seattle"
-}}}
+```
  
     Definitely not:
-{{{
-#!python
+
+```python
 i = i + 1
-}}}
+```
 
       The only case where it is okay to use single letter variable names is for arguments 
       passed into a constructor or using e for an exception.   For example:
-{{{
-#!python
+
+```python
 class foo:
   ... # doc string omitted
   itemcount = None
@@ -590,7 +581,7 @@ class foo:
     except KeyError, e:
       # Raise an error, the list is empty...
       raise KeyError("Can't pop an empty foo")
-}}}
+```
 
 
     General Variable Names
@@ -639,9 +630,7 @@ class foo:
 
 
 
-[[BR]]
-== Programming Recommendations ==
-----
+## Programming Recommendations ##
 
 
     - Comparisons to singletons like None should always be done with
@@ -660,11 +649,11 @@ class foo:
       Modules or packages should define their own domain-specific base
       exception class, which should be subclassed from the built-in Exception
       class.  Always include a class docstring.  E.g.:
-{{{
-#!python
+
+```python
 class MessageError(Exception):
   """Base class for errors in the email package."""
-}}}
+```
 
       Class naming conventions apply here, although you should add the suffix
       "Error" to your exception classes, if the exception is an error.
@@ -681,13 +670,13 @@ class MessageError(Exception):
       whenever possible instead of using a bare 'except:' clause.
 
       For example, use:
-{{{
-#!python
+
+```python
 try:
   import platform_specific_module
 except ImportError:
   platform_specific_module = None 
-}}}
+```
 
       A bare 'except:' clause will catch !SystemExit and !KeyboardInterrupt
       exceptions, making it harder to interrupt a program with Control-C,
@@ -710,26 +699,26 @@ except ImportError:
       avoids masking bugs.
 
       Yes:
-{{{
-#!python
+
+```python
 try:
   value = collection[key]
 except KeyError:
   return key_not_found(key)
 else:
   return handle_value(value)
-}}}
+```
 
       No:
-{{{
-#!python
+
+```python
 try:
   # Too broad!
   return handle_value(collection[key])
 except KeyError:
   # Will also catch KeyError raised by handle_value()
   return key_not_found(key)
-}}}
+```
 
 
 
@@ -760,61 +749,63 @@ The above code will actually always be True because the tuple (bool, 'string') i
       example:
 
         Yes: 
-{{{
-#!python
+
+```python
 if foo.startswith('bar'):
-}}}
+```
 
         No:  
-{{{
-#!python
+
+```python
 if foo[:3] == 'bar':
-}}}
+```
 
     - Object type comparisons should always use isinstance() instead
       of comparing types directly.
 
         Yes: 
-{{{
-#!python
+
+```python
 if isinstance(obj, int):
-}}}
+```
+
         No:  
-{{{
-#!python
+
+```python
 if type(obj) is type(1):
-}}}
+```
 
       When checking if an object is a string, keep in mind that it might be a
       unicode string too!  In Python 2.3, str and unicode have a common base
       class, basestring, so you can do:
-{{{
-#!python
+
+```python
 if isinstance(obj, basestring):
-}}}
+```
 
       The types module has the !StringTypes type defined for that purpose, e.g.:
-{{{
-#!python
+
+```python
 import types
 if isinstance(obj, types.StringTypes):
-}}}
+```
 
     - For sequences, (strings, lists, tuples), use the fact that empty
       sequences are false.
 
       Yes: 
-{{{
-#!python
+
+```python
 if not seq:
 if seq:
-}}}
+```
+
       No: 
-{{{
-#!python
+
+```python
 if len(seq)
 if not len(seq)
-}}}
+```
 
     - Don't write string literals that rely on significant trailing
       whitespace.  Such trailing whitespace is visually indistinguishable and
@@ -823,69 +814,67 @@ if not len(seq)
     - Don't compare boolean values to True or False using ==
 
         Yes:   
-{{{
-#!python
+
+```python
 if greeting:
-}}}
+```
 
         No:    
-{{{
-#!python
+
+```python
 if greeting == True:
-}}}
+```
 
         Worse: 
-{{{
-#!python
+
+```python
 if greeting is True:
-}}}
+```
 
       However, there are a few cases where a function may return True, False, or other values.   In these cases, checking if a value with an unknown type is True or False, is allowed.
 
     - Use the % string formatting operator only when necessary
 
       The string formatting operator '%' provides a convenient way to do printf like substitution of variables in strings.  It's better in many cases to put variables in line when you don't need the more advanced options (like fixed length fields).  The issue is that the string formatting operator makes understanding the output difficult in many cases.   For example in the following example, it's difficult to read the code and determine what the resulting output will look like:
-{{{
-#!python
+
+```python
 print "python %s %s %s/vesselinfodir/ %s/ > /tmp/carter.out 2> /tmp/carter.err"%(carter_script, dist_char, prefix,prefix)
-}}}
+```
 
       A better way to write this:
-{{{
-#!python
+
+```python
 print "python "+carter_script+" "+dist_char+" "+prefix+"/vesselinfodir/ "+prefix+"/ > /tmp/carter.out 2> /tmp/carter.err"
-}}}
+```
 
 
    - Use else statements for handling errors, not for normal flow in most cases.
 
 For example, if you have a function that is supposed to take a positive integer argument, don't do the following:
 
-{{{
-#!python
+```python
 if x > 0:
    ...
 else: # x must be 0
    ...
-}}}
+```
 
 It may be the case that x is negative, a different type, etc.   Instead do the following:
 
 
-{{{
-#!python
+```python
 if x > 0:
    ...
 elif x == 0: # x must be 0
    ...
 else:
    raise InternalError('Expected x to be a positive integer, not "'+str(x)+'"')
-}}}
+```
 
 
 
 
- == Potpourri ==
+ ## Potpourri ##
 
     Unix not Windows style text files.
 
@@ -914,10 +903,10 @@ else:
       because using these functions makes your code very dense and difficult to read.
 
       Do not use syntax like:
-{{{
-#!python
+
+```python
 must_testy = [must_test(line) for line in changed.split("\n")]
-}}}
+```
 
 
     Write test cases
@@ -937,8 +926,8 @@ must_testy = [must_test(line) for line in changed.split("\n")]
     Never use short circuit evaluation to produce output
 
       No:
-{{{
-#!python
+
+```python
 if synched or askokcancel("Change slice without synching?", "You
 have changes that are not synched with the repository. These changes
 will be lost if you change the slice right now. \n\nClick OK to change
@@ -946,12 +935,11 @@ slice without synching.", default=CANCEL):
   # then clause
 else:
   # else clause
-}}}
+```
 
       Yes:
-{{{
 
-#!python
+```python
 if not synched:
   if askokcancel("Change slice without synching?", "You have
       changes that are not synched with the repository. These changes will
@@ -962,11 +950,11 @@ if not synched:
     #else clause
 else:
   #then clause
-}}}
+```
 
      or if the then and else clauses are large write:
-{{{
-#!python
+
+```python
 if not synched:
   isok = askokcancel("Change slice without synching?", "You have
       changes that are not synched with the repository. These changes will
@@ -979,7 +967,7 @@ if isok:
   #then clause
 else:
   #else clause
-}}}
+```
 
      Writing the code the first way is hard for someone to read.   The
      second two ways make it more clear that you are relying on the short
