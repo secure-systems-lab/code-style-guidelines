@@ -747,7 +747,7 @@ except KeyError:
 
 
 
-Use {{{assert}}} sparingly.   
+Use `assert` sparingly.   
 
 Assert has some tricky semantics because it is a statement, not a
 function.   Thus you cannot call assert with a string to raise in the
@@ -761,8 +761,8 @@ The above code will actually always be True because the tuple (bool, 'string')
 is True.
 
 You should use assertions only when it is truly and internal error (i.e.
-somewhere it should be impossible to reach.   Even so, it is fine to log
-/ exitall instead.
+somewhere it should be impossible to reach.   Even so, it is fine to log /
+exitall instead.
 
 
 Use string methods instead of the string module.
@@ -913,7 +913,7 @@ else:
 
 ## Potpourri ##
 
-Unix not Windows style text files.
+### Unix not Windows style text files ###
 
 If you develop on Windows make sure you use dos2unix before checking in.
 
@@ -1014,25 +1014,25 @@ perform or avoid the evaluation of the askokcancel function.
 
 Don't use os.popen or os.system
 
-These are deprecated and we've found bugs in them.   Don't use them!   Use
-subprocess instead.
+  These are deprecated and we've found bugs in them.   Don't use them!   Use
+  subprocess instead.
 
 Don't use subprocess.Popen with a string argument (#508).
 
-Call subprocess.Popen with a first argument that looks like ['command', 'arg1',
-'arg2', ...].   Do not use 'command arg1 arg2 ...'!
+  Call subprocess.Popen with a first argument that looks like ['command',
+  'arg1', 'arg2', ...].   Do not use 'command arg1 arg2 ...'!
 
 
 Avoid changing directory (#487).
 
-Changing the current directory can cause multithreaded programs to break is
-scary ways and is usually an indication of bad programming style.   Don't do
-it!
+  Changing the current directory can cause multithreaded programs to break is
+  scary ways and is usually an indication of bad programming style.   Don't do
+  it!
 
 Don't use mutable objects as argument defaults (#828).
 
-If they are modified in the function (or returned and modified outside of the
-function), the changes persist to future function calls.  If you want the
-default of an empty list or dict, for example, use a default of None and then
-check for this value in the function and assign an empty list/dict inside the
-function.
+  If they are modified in the function (or returned and modified outside of the
+  function), the changes persist to future function calls.  If you want the
+  default of an empty list or dict, for example, use a default of None and then
+  check for this value in the function and assign an empty list/dict inside the
+  function.
