@@ -23,24 +23,24 @@ There is only one good reason to break a rule in the style guideline and that's 
 
 ## Code lay-out ##
 
-  Indentation
+### Indentation ###
+  
+Use 2 spaces per indentation level.
 
-    Use 2 spaces per indentation level.
+### Tabs ###
 
-  Tabs
+Never use tabs to indent project code.   There should be no tabs in Seattle code.
 
-    Never use tabs to indent project code.   There should be no tabs in Seattle code.
+### Maximum Line Length ###
 
-  Maximum Line Length
+  Try to limit most lines to a maximum of 79 characters.   This certainly should be done for comments, but use    common sense when applying this rule to code!   I've seen developers who have a highly indented loop wrap a     relatively short line across three separate lines to try to avoid going over 80 characters (don't do it!).
 
-    Try to limit most lines to a maximum of 79 characters.   This certainly should be done for comments, but use common sense when applying this rule to code!   I've seen developers who have a highly indented loop wrap a relatively short line across three separate lines to try to avoid going over 80 characters (don't do it!).
-
-    The preferred way of wrapping long lines is by using Python's implied line
-    continuation inside parentheses, brackets and braces.  If necessary, you
-    can add an extra pair of parentheses around an expression, but sometimes
-    using a backslash looks better.  Make sure to indent the continued line
-    appropriately.  The preferred place to break around a binary operator is
-    *after* the operator, not before it.  Some examples:
+  The preferred way of wrapping long lines is by using Python's implied line
+  continuation inside parentheses, brackets and braces.  If necessary, you
+  can add an extra pair of parentheses around an expression, but sometimes
+  using a backslash looks better.  Make sure to indent the continued line
+  appropriately.  The preferred place to break around a binary operator is
+  *after* the operator, not before it.  Some examples:
 
 ```python
 class Rectangle(Blob):
