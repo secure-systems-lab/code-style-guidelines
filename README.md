@@ -1,11 +1,12 @@
 # Code Style Guidelines #
 
-These guidelines provide examples about what to do (or not to do) when writing
-code for projects at the Secure Systems Lab.   These are based upon Justin's
-experiences working with Stork, [Guido
+These guidelines provide examples of what to do (or not to do) when writing
+code for the projects of [Secure Systems
+Lab](https://github.com/secure-systems-lab).  These guidelines are based upon
+@JustinCappos's experiences working with Stork, [Guido
 vanRossom's](http://www.python.org/dev/peps/pep-0008/) Python style guidelines,
-and the experiences and suggestions of team members.   Please give Justin
-feedback if there is anything you'd like to change.
+and the experiences and suggestions of team members.   Please give
+@JustinCappos feedback if there is anything you'd like to change.
 
 ## Table of Contents ##
 - [Code Lay-out](#code-lay-out)
@@ -21,11 +22,11 @@ feedback if there is anything you'd like to change.
 One of Guido's key insights in building Python is that code is read much more
 often than it is written.  The guidelines provided here are intended to improve
 the readability of code and make it consistent across the wide spectrum of
-Python code.  The primary goal of the code we write for Seattle is
-*readability*.   The other features that your code must have are security,
-correctness, and robustness (notice that performance is not listed).   The
-purpose of this document is to help to improve the readability of Seattle code
-(which I believe strongly impacts the security, correctness, and robustness).   
+Python code.  *readability* is the primary goal of the code written.  The other
+features that your code must have are security, correctness, and robustness
+(notice that performance is not listed).   The purpose of this document is to
+help to improve the readability of Secure Systems Lab code (which @JustinCappos
+believes strongly impacts the security, correctness, and robustness).   
 
 
 A style guide is about consistency.  Consistency within a project is very
@@ -45,7 +46,8 @@ Use 2 spaces per indentation level.
 
 ### Tabs ###
 
-Never use tabs to indent project code.   There should be no tabs in Seattle code.
+Never use tabs to indent project code.   There should be no tabs in Secure
+Systems Lab code.
 
 ### Maximum Line Length ###
 
@@ -925,9 +927,9 @@ Objects are a terrific programming tool when used correctly, but make code
 nearly unreadable when used poorly.   Unfortunately, even experienced
 developers have a hard time knowing how to correctly use objects.   About 80%
 of the code one could write is equally good with and without objects.   10% is
-easier with objects and 10% is easier without them.   Seattle code should use
-objects only in very rare cases.   The 90% of the code where objects can be
-avoided without significant impact, should be written without objects.
+easier with objects and 10% is easier without them.   Secure Systems Lab code
+should use objects only in very rare cases.   The 90% of the code where objects
+can be avoided without significant impact, should be written without objects.
 
 
 ### No lambda functions or lisp-esque code ###
@@ -947,8 +949,8 @@ must_testy = [must_test(line) for line in changed.split("\n")]
 ### Write test cases ###
 
 Since you're going to test your module anyways before integrating it into the
-rest of Seattle (right?), it makes sense to do it in a reusable way.   This way
-when you make changes later, you can immediately test to see if anything is
+rest of the project (right?), it makes sense to do it in a reusable way.   This
+way when you make changes later, you can immediately test to see if anything is
 broken.
 
 Write 90% tests.   The test should make sure that it will catch 90% of the
