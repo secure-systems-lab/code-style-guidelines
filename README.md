@@ -462,22 +462,12 @@ line.
 
 Example documentation strings for files, modules, and classes.
 
-Each file should have a header block that explains the purpose of the
-module, when it was started, who wrote it (or made very substantial
-revisions), and a list of any caveats or issues with the module.
+Each module should have a header block that specifies its file name and explains the purpose (and any caveats or issues) of the module.
 
 ```python
 """
 <Program Name>
   storkreport.py
-
-<Started>
-  February 4, 2005
-
-<Author>
-  sethh@cs.arizona.edu
-  Justin Cappos
-  Jeffry Johnston
 
 <Purpose>
   Provides Error Reporting/Logging Utility Functions.
