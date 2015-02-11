@@ -4,7 +4,7 @@ These guidelines provide examples of what to do (or not to do) when writing
 code for the projects of [Secure Systems
 Lab](https://github.com/secure-systems-lab) at NYU School of Engineering.  These guidelines are based upon
 @JustinCappos's experiences working with Stork, [Guido
-vanRossom's](http://www.python.org/dev/peps/pep-0008/) Python style guidelines,
+van Rossum's](http://www.python.org/dev/peps/pep-0008/) Python style guidelines,
 and the experiences and suggestions of team members.   Please give
 @JustinCappos feedback if there is anything you'd like to change.
 
