@@ -51,18 +51,19 @@ Systems Lab code.
 
 ### Maximum Line Length ###
 
-Try to limit most lines to a maximum of 79 characters.   This certainly
-should be done for comments, but use    common sense when applying this rule
-to code!   I've seen developers who have a highly indented loop wrap a
-relatively short line across three separate lines to try to avoid going over
-80 characters (don't do it!).
+Try to limit most lines to a maximum of 79 characters.  This certainly should
+be done for comments, but use common sense when applying this rule to code!
+I've seen developers who have a highly indented loop wrap a relatively short
+line across three separate lines to try to avoid going over 80 characters
+(don't do it!).
 
 The preferred way of wrapping long lines is by using Python's implied line
-continuation inside parentheses, brackets and braces.  If necessary, you
-can add an extra pair of parentheses around an expression, but sometimes
-using a backslash looks better.  Make sure to indent the continued line
-appropriately.  The preferred place to break around a binary operator is
-*after* the operator, not before it.  Some examples:
+continuation inside parentheses, brackets and braces.  If necessary, you can
+add an extra pair of parentheses around an expression, but sometimes using a
+backslash looks better.  Make sure to indent the continued line appropriately;
+double-indentation (4 spaces) is prefered for line continuation, to distinguish
+it from functional indentation.  The preferred place to break around a binary
+operator is *after* the operator, not before it.  Some examples:
 
 ```python
 class Rectangle(Blob):
@@ -134,10 +135,9 @@ comments and docstrings, and before module globals and constants.
 Always use the absolute package path for all imports.
 
 
-*Avoid circular imports*.   This is where `a.py` imports `b.py` and
-then either `b.py` or a path of imports from `b.py` imports `a.py`.
-This does really odd things to Python, in particular if you perform any actions
-during import.
+*Avoid circular imports*.   This is where `a.py` imports `b.py` and then either
+`b.py` or a path of imports from `b.py` imports `a.py`. This does really odd
+things to Python, in particular if you perform any actions during import.
 
 Try to avoid performing actions on module import.   This doesn't play well with
 circular imports and is non-intuitive for most programmers.
