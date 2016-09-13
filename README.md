@@ -339,9 +339,9 @@ specific action and indicate authorship and mindset.
 
 It is very important that when you change code you didn't write you comment the
 change.   I've spent days looking for bugs that people introduced because they
-changed code they thought they understood.  '''Any time you make changes to a
+changed code they thought they understood.  Any time you make changes to a
 module or function you didn't write, use your initials in a comment describing
-the scope and purpose of the change.'''
+the scope and purpose of the change.
 
 Use the comment to explain what you are thinking when you make the
 change.  
@@ -456,7 +456,7 @@ Optional plotz says to frobnicate the bizbaz first.
 """
 ```
 
-For one liner docstrings, it's okay to keep the closing """ on the same
+For one liner docstrings, it's okay to keep the closing `"""` on the same
 line.
 
 
@@ -553,10 +553,10 @@ class UserError(Exception):
 
 Use descriptive variable and function names.
 
-Put at least one adjective in each variable name like 'slicename' or
-'inputfileobj' or 'deststring'.   Also make sure that the type of the variable
+Put at least one adjective in each variable name like `slicename` or
+`'inputfileobj` or `deststring`.   Also make sure that the type of the variable
 is readable by looking at the name.   Also, the word "file" is ambiguous, use
-fileobj or filename (fn is an acceptable abbreviation for filename).   
+`fileobj` or `filename` (`fn` is an acceptable abbreviation for `filename`).   
 
 These rules are especially important for function arguments or variables that
 have long lifespans.
@@ -637,25 +637,25 @@ example that uses globals in a good way is a program that keeps a cache.
 Function names should be lowercase, with words separated by underscores as
 necessary to improve readability.
 
-!mixedCase is allowed only in contexts where that's already the prevailing
+mixedCase is allowed only in contexts where that's already the prevailing
 style (e.g. threading.py), to retain backwards compatibility.
 
 ### Function and method arguments ###
 
-Always use 'self' for the first argument to instance methods.
+Always use `self` for the first argument to instance methods.
 
 If a function argument's name clashes with a reserved keyword, it is generally
 better to append a single trailing underscore rather than use an abbreviation
-or spelling corruption.  Thus "print_" is better than "prnt".  (Perhaps better
+or spelling corruption.  Thus `print_` is better than `prnt`.  (Perhaps better
 is to avoid such clashes by using a synonym.)
 
 
 ## Programming Recommendations ##
 
-Comparisons to singletons like None should always be done with 'is' or 'is
-not', never the equality operators.
+Comparisons to singletons like `None` should always be done with `is` or `is
+not`, never the equality operators.
 
-Also, beware of writing "if x" when you really mean "if x is not None" -- e.g.
+Also, beware of writing `if x` when you really mean `if x is not None` -- e.g.
 when testing whether a variable or argument that defaults to None was set to
 some other value.  The other value might have a type (such as a container) that
 could be false in a boolean context!
@@ -678,15 +678,15 @@ Class naming conventions apply here, although you should add the suffix
 "Error" to your exception classes, if the exception is an error.
 Non-error exceptions need no special suffix.
 
-When raising an exception, use "raise !ValueError('message')" instead of
-the older form "raise !ValueError, 'message'".
+When raising an exception, use `raise ValueError('message')` instead of
+the older form `raise ValueError, 'message'`.
 
 The paren-using form is preferred because when the exception arguments
 are long or include string formatting, you don't need to use line
 continuation characters thanks to the containing parentheses.
 
 When catching exceptions, mention specific exceptions
-whenever possible instead of using a bare 'except:' clause.
+whenever possible instead of using a bare `except:` clause.
 
 For example, use:
 
@@ -697,22 +697,22 @@ except ImportError:
   platform_specific_module = None 
 ```
 
-A bare 'except:' clause will catch !SystemExit and !KeyboardInterrupt
+A bare `except:` clause will catch `SystemExit` and `KeyboardInterrupt`
 exceptions, making it harder to interrupt a program with Control-C,
 and can disguise other problems.  If you want to catch all
-exceptions that signal program errors, use 'except Exception:'.
+exceptions that signal program errors, use `except Exception:`.
 
-A good rule of thumb is to limit use of bare 'except' clauses to two 
+A good rule of thumb is to limit use of bare `except` clauses to two 
 cases:
 
 1) If the exception handler will be printing out or logging the traceback; at
 least the user will be aware that an error has occurred.  
 
 2) If the code needs to do some cleanup work, but then lets the exception
-propagate upwards with 'raise'.  'try...finally' is a better way to handle this
+propagate upwards with `raise`.  `try...finally` is a better way to handle this
 case.
 
-Additionally, for all try/except clauses, limit the 'try' clause
+Additionally, for all try/except clauses, limit the `try` clause
 to the absolute minimum amount of code necessary.  Again, this
 avoids masking bugs.
 
@@ -750,8 +750,8 @@ logical way
 assert(x = y, 'x and y must be equal')   # BAD CODE
 ```
 
-The above code will actually always be True because the tuple (bool, 'string')
-is True.
+The above code will actually always be true because the tuple `(bool, 'string')`
+is truthy.
 
 You should use assertions only when it is truly and internal error (i.e.
 somewhere it should be impossible to reach.   Even so, it is fine to log /
@@ -764,10 +764,10 @@ String methods are always much faster and share the same API with
 unicode strings.  Override this rule if backward compatibility with
 Pythons older than 2.0 is required.
 
-Use ''.startswith() and ''.endswith() instead of string slicing to check
+Use `''.startswith()` and `''.endswith()` instead of string slicing to check
 for prefixes or suffixes.
 
-startswith() and endswith() are cleaner and less error prone.  For
+`startswith()` and `endswith()` are cleaner and less error prone.  For
 example:
 
   Yes: 
@@ -782,7 +782,7 @@ if foo.startswith('bar'):
 if foo[:3] == 'bar':
 ```
 
-Object type comparisons should always use isinstance() instead
+Object type comparisons should always use `isinstance()` instead
 of comparing types directly.
 
   Yes: 
@@ -798,14 +798,14 @@ if type(obj) is type(1):
 ```
 
 When checking if an object is a string, keep in mind that it might be a
-unicode string too!  In Python 2.3, str and unicode have a common base
-class, basestring, so you can do:
+unicode string too!  In Python 2.3, `str` and `unicode` have a common base
+class, `basestring`, so you can do:
 
 ```python
 if isinstance(obj, basestring):
 ```
 
-The types module has the !StringTypes type defined for that purpose, e.g.:
+The types module has the `StringTypes` type defined for that purpose, e.g.:
 
 ```python
 import types
@@ -833,7 +833,7 @@ Don't write string literals that rely on significant trailing whitespace.  Such
 trailing whitespace is visually indistinguishable and some editors (or more
 recently, reindent.py) will trim them.
 
-Don't compare boolean values to True or False using ==
+Don't compare boolean values to `True` or `False` using `==`
 
 Yes:   
 
@@ -853,13 +853,13 @@ Worse:
 if greeting is True:
 ```
 
-However, there are a few cases where a function may return True, False, or
+However, there are a few cases where a function may return `True,` `False`, or
 other values.   In these cases, checking if a value with an unknown type is
-True or False, is allowed.
+`True` or `False`, is allowed.
 
-Use the % string formatting operator only when necessary
+Use the `%` string formatting operator only when necessary
 
-The string formatting operator '%' provides a convenient way to do printf like
+The string formatting operator `%` provides a convenient way to do `printf`-like
 substitution of variables in strings.  It's better in many cases to put
 variables in line when you don't need the more advanced options (like fixed
 length fields).  The issue is that the string formatting operator makes
@@ -878,7 +878,7 @@ print "python "+carter_script+" "+dist_char+" "+prefix+"/vesselinfodir/ "+prefix
 ```
 
 
-Use else statements for handling errors, not for normal flow in most cases.
+Use `else` statements for handling errors, not for normal flow in most cases.
 
 For example, if you have a function that is supposed to take a positive integer
 argument, don't do the following:
@@ -908,7 +908,7 @@ else:
 
 ### Unix not Windows style text files ###
 
-If you develop on Windows make sure you use dos2unix before checking in.
+If you develop on Windows make sure you use `dos2unix` before checking in.
 
 
 ### Avoid objects ###
@@ -925,7 +925,7 @@ can be avoided without significant impact, should be written without objects.
 
 ### No lambda functions or lisp-esque code ###
 
-Don't use lambda functions.   Don't use map, flatten, etc.   It's best
+Don't use lambda functions.   Don't use `map`, flatten, etc.   It's best
 not to use these functions and to write longer code that produces the
 same result instead because using these functions makes your code very
 dense and difficult to read.
@@ -949,7 +949,7 @@ potential problems with the function.   Avoid writing 50% tests (that only
 check a common case or two) and avoid writing 99.9% tests because it will
 consume too much of your time.
 
-All "external" functions '''must''' be tested.   Internal functions (starting
+All "external" functions **must** be tested.   Internal functions (starting
 with `__`) are up to your discretion.
 
     
@@ -1009,19 +1009,22 @@ perform or avoid the evaluation of the askokcancel function.
   These are deprecated and we've found bugs in them.   Don't use them!   Use
   subprocess instead.
 
-### Don't use subprocess.Popen with a string argument (#508) ###
+### Don't use subprocess.Popen with a string argument ###
+(See SeattleTestbed/attic#508)
 
-  Call subprocess.Popen with a first argument that looks like ['command',
-  'arg1', 'arg2', ...].   Do not use 'command arg1 arg2 ...'!
+  Call subprocess.Popen with a first argument that looks like `['command',
+  'arg1', 'arg2', ...]`.   Do not use `'command arg1 arg2 ...'`!
 
 
-### Avoid changing directory (#487) ###
+### Avoid changing directory ###
+(See SeattleTestbed/attic#487)
 
   Changing the current directory can cause multithreaded programs to break is
   scary ways and is usually an indication of bad programming style.   Don't do
   it!
 
-### Don't use mutable objects as argument defaults (#828) ###
+### Don't use mutable objects as argument defaults ###
+(See SeattleTestbed/attic#828)
 
   If they are modified in the function (or returned and modified outside of the
   function), the changes persist to future function calls.  If you want the
