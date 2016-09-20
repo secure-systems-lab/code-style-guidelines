@@ -638,7 +638,8 @@ Function names should be lowercase, with words separated by underscores as
 necessary to improve readability.
 
 mixedCase is allowed only in contexts where that's already the prevailing
-style (e.g. threading.py), to retain backwards compatibility.
+style (see for example the method names in `threading.py`), to retain backwards
+compatibility.
 
 ### Function and method arguments ###
 
@@ -1010,24 +1011,24 @@ perform or avoid the evaluation of the askokcancel function.
   subprocess instead.
 
 ### Don't use subprocess.Popen with a string argument ###
-(See SeattleTestbed/attic#508)
+(See also https://github.com/SeattleTestbed/attic/issues/508)
 
   Call subprocess.Popen with a first argument that looks like `['command',
   'arg1', 'arg2', ...]`.   Do not use `'command arg1 arg2 ...'`!
 
 
 ### Avoid changing directory ###
-(See SeattleTestbed/attic#487)
+(See also https://github.com/SeattleTestbed/attic/issues/487)
 
-  Changing the current directory can cause multithreaded programs to break is
+  Changing the current directory can cause multithreaded programs to break in
   scary ways and is usually an indication of bad programming style.   Don't do
   it!
 
 ### Don't use mutable objects as argument defaults ###
-(See SeattleTestbed/attic#828)
+(See also https://github.com/SeattleTestbed/attic/issues/828)
 
-  If they are modified in the function (or returned and modified outside of the
-  function), the changes persist to future function calls.  If you want the
-  default of an empty list or dict, for example, use a default of None and then
-  check for this value in the function and assign an empty list/dict inside the
-  function.
+  If mutable objects are modified in the function (or returned and modified 
+  outside of the function), the changes persist to future function calls.
+  If you want the default of an empty list or dict, for example, use a default of 
+  `None` and then  check for this value in the function and assign an empty 
+  list/dict inside the function.
