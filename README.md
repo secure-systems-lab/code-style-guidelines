@@ -1,7 +1,7 @@
 # Code Style Guidelines #
 
 These guidelines provide examples of what to do (or not to do) when writing
-code for the projects of the [Secure Systems
+Python code for the projects of the [Secure Systems
 Lab](https://ssl.engineering.nyu.edu/) in the NYU Tandon School of Engineering.  These guidelines are based upon
 @JustinCappos's experiences working with Stork, [Guido
 van Rossum's](http://www.python.org/dev/peps/pep-0008/) Python style guidelines,
