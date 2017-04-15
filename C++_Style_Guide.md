@@ -5,6 +5,7 @@ C/C++ code for the projects of the Secure Systems Lab in the NYU Tandon School
 of Engineering.
 The features that your code must have are readability, security, correctness,
 robustness and performance.
+
 In general for C/C++ programming languages we use [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html).
 
 Since security is an importan for Secure Systems Lab, we also should follow some
