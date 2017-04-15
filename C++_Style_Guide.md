@@ -10,7 +10,7 @@ code must have are readability, security, correctness, robustness and performanc
 
 In general for C/C++ programming languages we use [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html).
 
-Since security is an importan for Secure Systems Lab, we also should follow some
+Since security is an important for Secure Systems Lab, we also should follow some
 security rules.
 
 * For secure C++ coding please have a look follow link:
