@@ -8,6 +8,8 @@ van Rossum's](http://www.python.org/dev/peps/pep-0008/) Python style guidelines,
 and the experiences and suggestions of team members.   Please give
 @JustinCappos feedback if there is anything you'd like to change.
 
+A guide to the lab's development workflow is available [here](development_workflow.md).
+
 ## Table of Contents ##
 - [Code Lay-out](#code-lay-out)
 - [Imports](#imports)
