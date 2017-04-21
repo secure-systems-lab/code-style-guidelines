@@ -1,15 +1,16 @@
 # Github and Git
-Seattle's code base and ticket system are hosted on [Github](https://github.com/).
+The majority of projects in our lab are hosted on [Github](https://github.com/).
 Github is a web application that can be used for collaboration, code review, and code management.
 It is popularly used in open source projects and by distributed developers.  Contributions to
-Seattle  are expected to be made using [pull requests](https://help.github.com/articles/using-pull-requests)
-to repositories of the [SeattleTestbed](https://github.com/SeattleTestbed) organization.
+our projects are expected to be made using [pull requests](https://help.github.com/articles/using-pull-requests)
+to repositories of their GitHub organization.  For example, the Seattle repositories
+is hosted on the [SeattleTestbed](https://github.com/SeattleTestbed) organization.
 
 Git is a free and open source distributed [VCS](http://en.wikipedia.org/wiki/Version_control_system)
 (Version Control System).  A VCS helps manage changes made to files.  Users can run Git on their local
-computers and upload changes to remote repositories and files hosted on Github.  [SeattleTestbed](https://github.com/SeattleTestbed)
-contributors can edit files locally, upload their changes to Github, and then initiate a pull request. The following document
-covers the basics of using Git and submitting a pull request to one of Seattle's Github repositories.
+computers and upload changes to remote repositories and files hosted on Github.  Contributors can edit files
+locally, upload their changes to Github, and then initiate a pull request. The following document
+covers the basics of using Git and submitting a pull request to one of our project's GitHub repository.
 
 
 
