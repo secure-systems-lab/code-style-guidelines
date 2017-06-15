@@ -11,7 +11,7 @@ and the experiences and suggestions of team members.   Please give
 ## Table of Contents ##
 - [Code Lay-out](#code-lay-out)
 - [Imports](#imports)
-- [Whitespace in Expressions and Statements](#whitespace-in-expressions)
+- [Whitespace in Expressions and Statements](#whitespace-in-expressions-and-statements)
 - [Comments](#comments)
 - [Documentation Strings](#documentation-strings)
 - [Naming Conventions](#naming-conventions)
