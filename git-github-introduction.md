@@ -27,13 +27,6 @@ below for each supported platform.
 
 [Linux](http://git-scm.com/download/linux)
 
-Linux users may install Git using their distribution's package manager.
-Installation commands for many Linux distributions are available at [Linux](http://git-scm.com/download/linux).
-
-For example, Debian-based Linux distributions can use [APT](http://en.wikipedia.org/wiki/Advanced_Packaging_Tool) (Advanced Packaging Tool).
-```
-$ sudo apt-get install git
-```
 
 ## Configure Git User Information
 
