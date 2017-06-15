@@ -47,8 +47,25 @@ You can check your user information by typing the following command:
 $ git config --list
 ```
 
+## Configure Git to sign commits
 
-## Configure Github User Account
+If you have [GPG](https://gnupg.org/) installed on your system, you can
+configure Git to sign all of your commits with your GPG key.
+
+```
+$ git config --global user.signingkey <your GPG key ID>
+```
+
+Instructions on how to tell Git about your GPG key can be found [here](https://help.github.com/articles/telling-git-about-your-gpg-key/)
+
+There is also a convenient Git command to automatically sign all of of your commits:
+
+```
+$ git config commit.gpgsign true
+```
+
+
+## Configure GitHub User Account
 Before a pull request can be submitted to a [SeattleTestbed](https://github.com/SeattleTestbed)
 repository, a user account (free) must be created on Github.  This user account is also needed to create
 new repositories and fork ones that already exist on Github.
