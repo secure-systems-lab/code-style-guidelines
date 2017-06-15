@@ -153,16 +153,17 @@ $ git branch
 Next, to add a new branch, which is the preferred method for working on and adding new features, type **git branch new_branch**, where **''new_branch**'' is the name of the new branch:
 
 ```
+
 $ git branch new_branch
 ```
-
 The next step is to switch to the newly created branch:
 
 ```
 $ git checkout new_branch
 Switched to branch 'new_branch'
 ```
-
+Note: ```git checkout -b [branchname]``` is a shortcut to create and checkout a
+new branch.
 
 ### Commit a New File to the Branch
 
