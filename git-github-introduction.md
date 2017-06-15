@@ -1,6 +1,6 @@
-# Github and Git
-The majority of projects in our lab are hosted on [Github](https://github.com/).
-Github is a web application that can be used for collaboration, code review, and code management.
+# GitHub and Git
+The majority of projects in our lab are hosted on [github.com](https://github.com/).
+GitHub is a web application that can be used for collaboration, code review, and code management.
 It is popularly used in open source projects and by distributed developers.  Contributions to
 our projects are expected to be made using [pull requests](https://help.github.com/articles/using-pull-requests)
 to repositories of their GitHub organization.  For example, the Seattle repositories
@@ -8,8 +8,8 @@ is hosted on the [SeattleTestbed](https://github.com/SeattleTestbed) organizatio
 
 Git is a free and open source distributed [VCS](http://en.wikipedia.org/wiki/Version_control_system)
 (Version Control System).  A VCS helps manage changes made to files.  Users can run Git on their local
-computers and upload changes to remote repositories and files hosted on Github.  Contributors can edit files
-locally, upload their changes to Github, and then initiate a pull request. The following document
+computers and upload changes to remote repositories and files hosted on GitHub.  Contributors can edit files
+locally, upload their changes to GitHub, and then initiate a pull request. The following document
 covers the basics of using Git and submitting a pull request to one of our project's GitHub repository.
 
 
@@ -17,15 +17,15 @@ covers the basics of using Git and submitting a pull request to one of our proje
 
 
 ## Git Installation
-Github provides platform-specific installers for Mac and Windows users.  Installation instructions
-are provided in the links below for each supported platform.
+[git-scm.com](https://git-scm.com/) provides platform-specific installers for
+Mac and Windows users.  Installation instructions are provided in the links
+below for each supported platform.
 
-[Mac](https://mac.github.com)
+[Mac](https://git-scm.com/download/mac)
 
-[Windows](https://windows.github.com)
+[Windows](https://git-scm.com/download/win)
 
 [Linux](http://git-scm.com/download/linux)
-
 
 Linux users may install Git using their distribution's package manager.
 Installation commands for many Linux distributions are available at [Linux](http://git-scm.com/download/linux).
@@ -34,7 +34,6 @@ For example, Debian-based Linux distributions can use [APT](http://en.wikipedia.
 ```
 $ sudo apt-get install git
 ```
-
 
 ## Configure Git User Information
 
