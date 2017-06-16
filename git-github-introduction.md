@@ -49,8 +49,8 @@ $ git config --list
 
 ## Configure Git to sign commits
 
-If you have [GPG](https://gnupg.org/) installed on your system, you can
-configure Git to sign all of your commits with your GPG key.
+If [GPG](https://gnupg.org/) is installed on your system, you can configure Git
+to sign all of your commits with your GPG key.
 
 ```
 $ git config --global user.signingkey <your GPG key ID>
@@ -79,7 +79,7 @@ A user-specific home page can contain repositories that the user has created or 
 and organizations he/she has joined. 
 
 
-## Fork a `SeattleTestbed` Repository
+## Fork a Repository
 
 Forking refers to making a copy of a repository and saving it to your user home page. General instructions on forking repositories and managing pull requests are available [here](https://help.github.com/articles/fork-a-repo)
 
