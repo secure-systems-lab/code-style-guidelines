@@ -118,26 +118,31 @@ A **repy_v2** folder is created in the local, current working directory.  Before
 $ cd repy_v2/
 ```
 
-### Set Alias for Forked Repository
+### Keep your Fork in Sync with the Upstream Repository
 Setting an alias for a repository can help developers better manage repository changes and
 keep local and remote repositories in sync.  The alias is a string that refers to the repository by name instead of the
 repository's full URL.  In the example below, the forked [repy_v2](https://github.com/SeattleTestbed/repy_v2) repository is given the **upstream** alias:
-
 
 ```
 $ git remote add upstream https://github.com/SeattleTestbed/repy_v2.git
 ```
 
-
-### Retrieve Latest Version of Forked Repository
-
-Fetching and merging the latest changes of `upstream` (remembering that the `upstream` alias points to the forked repository) can be done with the
-`pull` Github command.  The `pull` command fetches changes made to the remote repository and merges them into your local repository.  Branches are multiple working versions of a master project (or document). The main branch is the master repository and multiple, local branches of this master may be created by users so that they can work on the project before committing their work to the master document.  The pull command expects to see a (by default, the master) branch name, which the user will find on the project's [main repository](https://github.com/SeattleTestbed/repy_v2).  Information on creating a new branch is in the next section, ''Add a New Branch Locally''.
+Fetching and merging the latest changes of `upstream` (remembering that the
+`upstream` alias points to the forked repository) can be done with the `pull`
+Github command.  The `pull` command fetches changes made to the remote
+repository and merges them into your local repository.  Branches are multiple
+working versions of a master project (or document). The main branch is the
+master repository and multiple, local branches of this master may be created by
+users so that they can work on the project before committing their work to the
+master document.  The pull command expects to see a (by default, the master)
+branch name, which the user will find on the project's [main
+repository](https://github.com/SeattleTestbed/repy_v2).  Information on
+creating a new branch is in the next section, ''Add a New Branch Locally''.
 
 ![GitHub Branches](/images/branches_sm.png)
 
 
-Additional information on branching: [branching](http://git-scm.com/book/en/Git-Branching-What-a-Branch-Is)
+Additional information on [syncing a fork](https://help.github.com/articles/syncing-a-fork/)
 
 ```
 $ git pull upstream master
