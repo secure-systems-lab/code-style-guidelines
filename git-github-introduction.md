@@ -173,9 +173,13 @@ new branch.
 
 ### Commit a New File to the Branch
 
-Create a `README.txt` file and save it to the local machine. You do this by opening a new document in a text editor and saving as `README.txt` in the current directory. In the README file you would typically put instructions or details about the project. 
+Create a `LICENSE` file and save it to the local machine. You do this by
+opening a new document in a text editor and saving as `LICENSE` in the current
+directory. In the LICENSE file you can include an open-source license for the
+project.  The MIT license is typically used for most of our lab's projects.
 
-The next step is to ask Git if it can find the README.txt file, by asking it to identify all untracked files (on the local repository):
+The next step is to ask Git if it can find the LICENSE file, by asking it to
+identify all untracked files (on the local repository):
 
 ```
 $ git status
@@ -183,31 +187,33 @@ On branch new_branch
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
-    README.txt
+  LICENSE
 
     nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-Git indicates that the README.txt file is untracked, so the first command (git add) will add it. The second command (git status) will tell us whether the file has been added successfully. 
+Git indicates that the LICENSE file is untracked, so the first command (git
+add) will add it. The second command (git status) will tell us whether the file
+has been added successfully.
 
 ```
-$ git add README.txt
+$ git add LICENSE
 
 $ git status
 On branch new_feature
 Changes to be committed:
   (use "git reset HEAD <file>..." to unstage)
 
-    new file:   README.txt
+    new file:   LICENSE
 ```
 
 After adding the file it must be committed. By committing a file, Git creates a message about the file that will be transmitted once the file is ready to be pushed to the master branch.  A Git message should be descriptive and mention the reason for the change, or changes, to be committed.  In the following example, the `-m` flag (for message) is used and a commit message is appended in quotes.
 
 ```
-$ git commit -m "Add a README file to the project"
-[new_branch 7660f34] Add a README file to the project
+$ git commit -m "Add a LICENSE file to the project"
+[new_branch 7660f34] Add a LICENSE file to the project
  1 file changed, 1 insertion(+)
-  create mode 100644 README.txt
+  create mode 100644 LICENSE
 ```
 
 If you want to check to see that all files have been added and committed, type **git status** again. The status should show that the directory is clean, as in the example below:
@@ -219,7 +225,7 @@ nothing to commit, working directory clean
 ```
 
 To get a list of commit messages made thus far, type **git log**. 
-This will show the user's information and the commit message (in this case "Add a README to the project"):
+This will show the user's information and the commit message (in this case "Add a LICENSE to the project"):
 
 ```
 $ git log
@@ -270,11 +276,11 @@ enter comments and allow the user and
 [repy_v2](https://github.com/SeattleTestbed/repy_v2) developers to collaborate.
 The user can make additional changes to the pull request (for example, to
 address an issue raised) by pushing commits to the user's forked repository.
-In the following example, the user first edits the `README.txt` file and saves
-the changes before issuing **git add README.txt**:
+In the following example, the user first edits the `LICENSE` file and saves
+the changes before issuing **git add LICENSE**:
 
 ```
-$ git add README.txt
+$ git add LICENSE
 
 $ git commit -m "Add missing section to README noticed by reviewer"
 
@@ -321,33 +327,31 @@ http://zackperdue.com/tutorials/super-useful-need-to-know-git-commands
 The section below lists some useful, common Git commands.
 
 
-To show changes/differences in the README.txt that have not been committed:
+To show changes/differences in the LICENSE that have not been committed:
 
 ```
-$ git diff README.txt
-diff --git a/README.txt b/README.txt
+$ git diff LICENSE
+diff --git a/LICENSE b/LICENSE
 index 70a3d0f..93bce69 100644
---- a/README.txt
-+++ b/README.txt
+--- a/LICENSE
++++ b/LICENSE
 @@ -1 +1,2 @@
- README file.
+ LICENSE file.
  +new line added here.
 ```
 
 
-To Mark README.txt as removed and stage it for removal:
+To Mark LICENSE as removed and stage it for removal:
 
 ```
-$ git rm README.txt
+$ git rm LICENSE
 ```
 
 
-To unstage the modified README.txt file and reset its contents to the current version on the repository:
+To unstage the modified LICENSE file and reset its contents to the current version on the repository:
 
 ```
-$ git reset README.txt
-```
-
+$ git reset LICENSE ``` 
 
 To move a file to a new location but let Git know of the change:
 
