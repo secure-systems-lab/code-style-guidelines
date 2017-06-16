@@ -141,8 +141,8 @@ creating a new branch is in the next section, ''Add a New Branch Locally''.
 
 ![GitHub Branches](/images/branches_sm.png)
 
-
-Additional information on [syncing a fork](https://help.github.com/articles/syncing-a-fork/)
+Additional information on [syncing a
+fork](https://help.github.com/articles/syncing-a-fork/) is recommended.
 
 ```
 $ git pull upstream master
