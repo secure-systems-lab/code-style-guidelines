@@ -233,7 +233,7 @@ commit 3c9b1d0068075fdac6ed928f8e5a27ac3253ca5e
 Author: John Smith <john.smith@example.com>
 Date:   Tue Sep 2 14:46:36 2014 -0400
 
-    Add a README to the project.
+    Add a LICENSE to the project.
 ```
 
 
@@ -282,7 +282,7 @@ the changes before issuing **git add LICENSE**:
 ```
 $ git add LICENSE
 
-$ git commit -m "Add missing section to README noticed by reviewer"
+$ git commit -m "Add missing section to LICENSE noticed by reviewer"
 
 $ git push origin master
 ```
