@@ -341,17 +341,17 @@ index 70a3d0f..93bce69 100644
 ```
 
 
-To Mark LICENSE as removed and stage it for removal:
+To mark LICENSE as removed and stage it for removal:
 
 ```
 $ git rm LICENSE
 ```
 
-
 To unstage the modified LICENSE file and reset its contents to the current version on the repository:
 
 ```
-$ git reset LICENSE ``` 
+$ git reset HEAD LICENSE
+```
 
 To move a file to a new location but let Git know of the change:
 
