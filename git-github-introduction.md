@@ -81,9 +81,15 @@ and organizations he/she has joined.
 
 ## Fork a Repository
 
-Forking refers to making a copy of a repository and saving it to your user home page. General instructions on forking repositories and managing pull requests are available [here](https://help.github.com/articles/fork-a-repo)
+Forking refers to making a copy of a repository and saving it to your user home page. General instructions on forking repositories and managing pull requests are available [here](https://help.github.com/articles/fork-a-repo).
 
-Forking a [SeattleTestbed](https://github.com/SeattleTestbed) repository requires clicking the ''fork'' button on the selected repository's Github page, which creates a copy of the repository and saves it to a repository directly controlled by the user (on the user's Github home page).  The URL of the forked repository can then be used with Git to create and save a local copy.  
+Forking a repository, [SeattleTestbed](https://github.com/SeattleTestbed) in
+this example, requires clicking the ''fork'' button on the selected
+repository's Github page, which creates a copy of the repository and saves it
+to a repository directly controlled by the user (on the user's Github home
+page).  The URL of the forked repository can then be used with Git to create
+and save a local copy.
+
 
 Navigate to the [repy_v2](https://github.com/SeattleTestbed/repy_v2) repository and click on the ''fork'' button in the upper right-hand corner of the page.
 
