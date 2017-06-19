@@ -50,7 +50,7 @@ $ git config --list
 ## Configure Git to sign commits
 
 If [GPG](https://gnupg.org/) is installed on your system, you can configure Git
-to sign all of your commits with your GPG key.
+to sign your commits.
 
 ```
 $ git config --global user.signingkey <your GPG key ID>
@@ -59,7 +59,7 @@ $ git config --global user.signingkey <your GPG key ID>
 Instructions on how to tell Git about your GPG key can be found [here](https://help.github.com/articles/telling-git-about-your-gpg-key/).
 
 There is also a convenient Git command to automatically sign all of of your commits:
-Note: The command below requires Git >= 2.0.0.
+Note: The command below requires Git version >= 2.0.0.
 
 ```
 $ git config commit.gpgsign true
