@@ -68,16 +68,16 @@ $ git config commit.gpgsign true
 
 ## Configure GitHub User Account
 Before a pull request can be submitted to a [SeattleTestbed](https://github.com/SeattleTestbed)
-repository, a user account (free) must be created on Github.  This user account is also needed to create
-new repositories and fork ones that already exist on Github.
+repository, a user account (free) must be created on GitHub.  This user account is also needed to create
+new repositories and fork ones that already exist on GitHub.
 
 
-A Github user account can be created at https://github.com/join
+A GitHub user account can be created at https://github.com/join
 
-Once users create their accounts, user-specific home pages are created. For example: ''https://github.com/john-smith''.
-A user-specific home page can contain repositories that the user has created or forked, contribution activity,
-and organizations he/she has joined. 
-
+Once users create their accounts, user-specific home pages are created. For
+example: ''https://github.com/john-smith''.  A user-specific home page can
+contain repositories that the user has created or forked, contribution
+activity, and organizations he/she has joined.
 
 ## Fork a Repository
 
@@ -85,8 +85,8 @@ Forking refers to making a copy of a repository and saving it to your user home 
 
 Forking a repository, [SeattleTestbed](https://github.com/SeattleTestbed) in
 this example, requires clicking the ''fork'' button on the selected
-repository's Github page, which creates a copy of the repository and saves it
-to a repository directly controlled by the user (on the user's Github home
+repository's GitHub page, which creates a copy of the repository and saves it
+to a repository directly controlled by the user (on the user's GitHub home
 page).  The URL of the forked repository can then be used with Git to create
 and save a local copy.
 
@@ -99,7 +99,7 @@ Navigate to the [repy_v2](https://github.com/SeattleTestbed/repy_v2) repository 
 
 ## Clone a Git Repository
 
-The **git clone** command creates a local copy of a remotely hosted Github repository.  So far, the **repy_v2** repository has only been copied and saved to the user's Github home page.  In the following example, the **repy_v2** `SeattleTestbed` repository is cloned to the user's local Git repository.  
+The **git clone** command creates a local copy of a remotely hosted GitHub repository.  So far, the **repy_v2** repository has only been copied and saved to the user's GitHub home page.  In the following example, the **repy_v2** `SeattleTestbed` repository is cloned to the user's local Git repository.  
 
 ```
 $ git clone https://github.com/john-smith/repy_v2
@@ -112,24 +112,29 @@ Checking connectivity... done.
 ```
 
 
-A **repy_v2** folder is created in the local, current working directory.  Before issuing Github commands, you need to change directories - to either the cloned repository's directory, or to one of its sub-directories. For example:
+A **repy_v2** folder is created in the local, current working directory.
+Before issuing GitHub commands, you need to change directories to either the
+cloned repository's directory, or to one of its sub-directories. For example:
 
 ```
 $ cd repy_v2/
 ```
 
-### Keep your Fork in Sync with the Upstream Repository
-Setting an alias for a repository can help developers better manage repository changes and
-keep local and remote repositories in sync.  The alias is a string that refers to the repository by name instead of the
-repository's full URL.  In the example below, the forked [repy_v2](https://github.com/SeattleTestbed/repy_v2) repository is given the **upstream** alias:
+### Keep your Fork in Sync with the original Repository
+Setting an alias for a repository can help developers better manage repository
+changes and keep local and remote repositories in sync.  The alias is a string
+that refers to the repository by name instead of the repository's full URL.  In
+the example below, the original
+[repy_v2](https://github.com/SeattleTestbed/repy_v2) repository is given the
+**upstream** alias:
 
 ```
 $ git remote add upstream https://github.com/SeattleTestbed/repy_v2.git
 ```
 
 Fetching and merging the latest changes of `upstream` (remembering that the
-`upstream` alias points to the forked repository) can be done with the `pull`
-Github command.  The `pull` command fetches changes made to the remote
+`upstream` alias points to the original repository) can be done with GitHub's
+`pull` command.  The `pull` command fetches changes made to the remote
 repository and merges them into your local repository.  Branches are multiple
 working versions of a master project (or document). The main branch is the
 master repository and multiple, local branches of this master may be created by
@@ -244,7 +249,11 @@ Date:   Tue Sep 2 14:46:36 2014 -0400
 
 ### Push the Commit to the Remote (Forked) Repository
 
-This step will push the branch to the remote repository controlled by the user (the forked version that you created earlier). The changes committed in the "Commit a New File to the Branch" so far exist on the local repository.  The earlier commit message, along with the file, are pushed to the user's remote repository. 
+This step will push the branch to the remote repository controlled by the user
+(the forked version that you created earlier). The changes committed in the
+"Commit a New File to the Branch" so far exist on the local repository.  The
+earlier commit message, along with the file, are pushed to the user's remote
+repository.
 
 ```
 $ git push origin new_branch
@@ -265,14 +274,14 @@ To https://github.com/john-smith/repy_v2
 
 After the files are pushed, they can be made available to the Seattle Testbed Organization, after you (the user) initiates a pull request. 
 
-
-Visit the forked ''repy_v2'' repository and click on the green button next to the drop-down list of branches.
-The next page is where you will preview the commits and write/post a summary or comments about the changes you made. The image below shows where to locate the pull request button.
-
+Visit the forked ''repy_v2'' repository and click on the green button next to
+the drop-down list of branches.  The next page is where you will preview the
+commits and write/post a summary or comments about the changes you made. The
+image below shows where to locate the pull request button.
 
 ![GitHub Pull Request](/images/pull-request_sm.png)
 
-A page (containing the user's Pull Request) is generated by Github and viewable
+A page (containing the user's Pull Request) is generated by GitHub and viewable
 by both the user and developers of the **repy_v2** repository.  A
 [repy_v2](https://github.com/SeattleTestbed/repy_v2) developer can review the
 user's changes and either accept, decline, or ask that the user addresses
@@ -281,7 +290,7 @@ enter comments and allow the user and
 [repy_v2](https://github.com/SeattleTestbed/repy_v2) developers to collaborate.
 The user can make additional changes to the pull request (for example, to
 address an issue raised) by pushing commits to the user's forked repository.
-In the following example, the user first edits the `LICENSE` file and saves
+In the following example, the user edits the `LICENSE` file and saves
 the changes before issuing **git add LICENSE**:
 
 ```
