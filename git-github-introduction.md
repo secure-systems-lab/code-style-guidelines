@@ -4,7 +4,7 @@ GitHub is a web application that can be used for collaboration, code review, and
 It is popularly used in open source projects and by distributed developers.  Contributions to
 our projects are expected to be made using [pull requests](https://help.github.com/articles/using-pull-requests)
 to repositories of their GitHub organization.  For example, the Seattle repositories
-is hosted on the [SeattleTestbed](https://github.com/SeattleTestbed) organization.
+are hosted on the [SeattleTestbed](https://github.com/SeattleTestbed) organization.
 
 Git is a free and open source distributed [VCS](http://en.wikipedia.org/wiki/Version_control_system)
 (Version Control System).  A VCS helps manage changes made to files.  Users can run Git on their local
