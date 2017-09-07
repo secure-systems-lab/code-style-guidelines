@@ -102,6 +102,7 @@ repository.  So far, the `repy_v2` repository has only been copied and saved
 to the user's GitHub home page.  In the following example, the `repy_v2`
 `SeattleTestbed` repository is cloned to the user's local Git repository.
 
+```
 $ git clone https://github.com/<username>/repy_v2
 Cloning into 'repy_v2'...
 remote: Counting objects: 1547, done.
