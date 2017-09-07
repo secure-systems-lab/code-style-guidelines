@@ -18,15 +18,9 @@ covers the basics of using Git and submitting a pull request to one of our proje
 
 ## Git Installation
 [git-scm.com](https://git-scm.com/) provides platform-specific installers for
-Mac and Windows users.  Installation instructions are provided in the links
-below for each supported platform.
-
-[Mac](https://git-scm.com/download/mac)
-
-[Windows](https://git-scm.com/download/win)
-
-[Linux](http://git-scm.com/download/linux)
-
+[Mac](https://git-scm.com/download/mac),
+[Linux](http://git-scm.com/download/linux), and
+[Windows](https://git-scm.com/download/win) users.
 
 ## Configure Git User Information
 
