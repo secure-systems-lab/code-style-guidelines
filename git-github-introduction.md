@@ -50,32 +50,38 @@ to sign your commits.
 $ git config --global user.signingkey <your GPG key ID>
 ```
 
-Instructions on how to tell Git about your GPG key can be found [here](https://help.github.com/articles/telling-git-about-your-gpg-key/).
+GitHub provides more thorough [instructions on how to tell Git about your GPG
+key](https://help.github.com/articles/telling-git-about-your-gpg-key/).
 
-There is also a convenient Git command to automatically sign all of of your commits:
-Note: The command below requires Git version >= 2.0.0.
-
+There is also a convenient Git command to automatically sign all of of your
+commits:
 ```
 $ git config commit.gpgsign true
 ```
 
+Note: The command above requires Git version >= 2.0.0.
 
-## Configure GitHub User Account
-Before a pull request can be submitted to a [SeattleTestbed](https://github.com/SeattleTestbed)
-repository, a user account (free) must be created on GitHub.  This user account is also needed to create
+
+
+## GitHub User Account
+Before a pull request can be submitted to a
+[SeattleTestbed](https://github.com/SeattleTestbed) repository, a user account
+(free) must be created on GitHub.  This user account is also needed to create
 new repositories and fork ones that already exist on GitHub.
-
 
 A GitHub user account can be created at https://github.com/join
 
 Once users create their accounts, user-specific home pages are created. For
-example: ''https://github.com/john-smith''.  A user-specific home page can
+example: ''https://github.com/<username>''.  A user-specific home page can
 contain repositories that the user has created or forked, contribution
 activity, and organizations he/she has joined.
 
 ## Fork a Repository
 
-Forking refers to making a copy of a repository and saving it to your user home page. General instructions on forking repositories and managing pull requests are available [here](https://help.github.com/articles/fork-a-repo).
+Forking refers to making a copy of a GitHub repository and saving it to your
+GitHub user homepage. GitHub provides general instructions on [creating and
+managing forks](https://help.github.com/articles/fork-a-repo) and [pull
+requests](https://help.github.com/articles/about-pull-requests/).
 
 Forking a repository, [SeattleTestbed](https://github.com/SeattleTestbed) in
 this example, requires clicking the ''fork'' button on the selected
@@ -84,19 +90,19 @@ to a repository directly controlled by the user (on the user's GitHub home
 page).  The URL of the forked repository can then be used with Git to create
 and save a local copy.
 
-
-Navigate to the [repy_v2](https://github.com/SeattleTestbed/repy_v2) repository and click on the ''fork'' button in the upper right-hand corner of the page.
-
+Navigate to the [repy_v2](https://github.com/SeattleTestbed/repy_v2) repository
+and click on the ''fork'' button in the upper right-hand corner of the page.
 
 ![GitHub Fork](/images/fork_sm.png)
 
-
 ## Clone a Git Repository
 
-The **git clone** command creates a local copy of a remotely hosted GitHub repository.  So far, the **repy_v2** repository has only been copied and saved to the user's GitHub home page.  In the following example, the **repy_v2** `SeattleTestbed` repository is cloned to the user's local Git repository.  
+The **git clone** command creates a local copy of a remotely hosted GitHub
+repository.  So far, the **repy_v2** repository has only been copied and saved
+to the user's GitHub home page.  In the following example, the **repy_v2**
+`SeattleTestbed` repository is cloned to the user's local Git repository.
 
-```
-$ git clone https://github.com/john-smith/repy_v2
+$ git clone https://github.com/<username>/repy_v2
 Cloning into 'repy_v2'...
 remote: Counting objects: 1547, done.
 remote: Total 1547 (delta 0), reused 0 (delta 0)
@@ -234,7 +240,7 @@ This will show the user's information and the commit message (in this case "Add 
 ```
 $ git log
 commit 3c9b1d0068075fdac6ed928f8e5a27ac3253ca5e
-Author: John Smith <john.smith@example.com>
+Author: <username>  <username@example.com>
 Date:   Tue Sep 2 14:46:36 2014 -0400
 
     Add a LICENSE to the project.
@@ -252,14 +258,14 @@ repository.
 ```
 $ git push origin new_branch
 
-Username for 'https://github.com': john-smith 
-Password for 'https://john-smith@github.com': 
+Username for 'https://github.com': <username> 
+Password for 'https://<username>@github.com': 
 Counting objects: 5, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (2/2), done.
 Writing objects: 100% (3/3), 308 bytes | 0 bytes/s, done.
 Total 3 (delta 1), reused 0 (delta 0)
-To https://github.com/john-smith/repy_v2
+To https://github.com/<username>/repy_v2
  * [new branch]      new_branch -> new_branch
 ```
 
