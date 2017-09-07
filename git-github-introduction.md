@@ -291,7 +291,7 @@ enter comments and allow the user and
 The user can make additional changes to the pull request (for example, to
 address an issue raised) by pushing commits to the user's forked repository.
 In the following example, the user edits the `LICENSE` file and saves
-the changes before issuing **git add LICENSE**:
+the changes before issuing `git add LICENSE`:
 
 ```
 $ git add LICENSE
