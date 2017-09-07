@@ -72,9 +72,9 @@ new repositories and fork ones that already exist on GitHub.
 A GitHub user account can be created at https://github.com/join
 
 Once users create their accounts, user-specific home pages are created. For
-example: ''https://github.com/<username>''.  A user-specific home page can
-contain repositories that the user has created or forked, contribution
-activity, and organizations he/she has joined.
+example: https://github.com/<username>.  A user-specific home page can contain
+repositories that the user has created or forked, contribution activity, and
+organizations he/she has joined.
 
 ## Fork a Repository
 
@@ -84,22 +84,22 @@ managing forks](https://help.github.com/articles/fork-a-repo) and [pull
 requests](https://help.github.com/articles/about-pull-requests/).
 
 Forking a repository, [SeattleTestbed](https://github.com/SeattleTestbed) in
-this example, requires clicking the ''fork'' button on the selected
+this example, requires clicking the `fork` button on the selected
 repository's GitHub page, which creates a copy of the repository and saves it
 to a repository directly controlled by the user (on the user's GitHub home
 page).  The URL of the forked repository can then be used with Git to create
 and save a local copy.
 
 Navigate to the [repy_v2](https://github.com/SeattleTestbed/repy_v2) repository
-and click on the ''fork'' button in the upper right-hand corner of the page.
+and click on the `fork` button in the upper right-hand corner of the page.
 
 ![GitHub Fork](/images/fork_sm.png)
 
 ## Clone a Git Repository
 
 The **git clone** command creates a local copy of a remotely hosted GitHub
-repository.  So far, the **repy_v2** repository has only been copied and saved
-to the user's GitHub home page.  In the following example, the **repy_v2**
+repository.  So far, the `repy_v2` repository has only been copied and saved
+to the user's GitHub home page.  In the following example, the `repy_v2`
 `SeattleTestbed` repository is cloned to the user's local Git repository.
 
 $ git clone https://github.com/<username>/repy_v2
@@ -111,8 +111,7 @@ Resolving deltas: 100% (778/778), done.
 Checking connectivity... done.
 ```
 
-
-A **repy_v2** folder is created in the local, current working directory.
+A `repy_v2` folder is created in the local, current working directory.
 Before issuing GitHub commands, you need to change directories to either the
 cloned repository's directory, or to one of its sub-directories. For example:
 
@@ -126,7 +125,7 @@ changes and keep local and remote repositories in sync.  The alias is a string
 that refers to the repository by name instead of the repository's full URL.  In
 the example below, the original
 [repy_v2](https://github.com/SeattleTestbed/repy_v2) repository is given the
-**upstream** alias:
+`upstream` alias:
 
 ```
 $ git remote add upstream https://github.com/SeattleTestbed/repy_v2.git
@@ -142,7 +141,7 @@ users so that they can work on the project before committing their work to the
 master document.  The pull command expects to see a (by default, the master)
 branch name, which the user will find on the project's [main
 repository](https://github.com/SeattleTestbed/repy_v2).  Information on
-creating a new branch is in the next section, ''Add a New Branch Locally''.
+creating a new branch is in the next section, `Add a New Branch Locally`.
 
 ![GitHub Branches](/images/branches_sm.png)
 
