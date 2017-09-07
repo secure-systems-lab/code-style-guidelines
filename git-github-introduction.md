@@ -26,8 +26,10 @@ covers the basics of using Git and submitting a pull request to one of our proje
 
 After installing Git, the next step is for the user to configure his/her author information (username and email address) so that Git will correctly log the author of a commit. 
 
-
-To configure Git author information, open the Terminal and type **git config --global user.name "user's name"**, which will allow you to configure Git on your local machine. Each repository you create will use the same user (author) configuration if you use the global flag (as in the provided example). 
+To configure Git author information, open the Terminal and type `git config
+--global user.name "user's name"`, which will allow you to configure Git on
+your local machine. Each repository you create will use the same user (author)
+configuration if you use the global flag (as in the provided example).
 
 ```
 $ git config --global user.name "John Smith"
@@ -97,7 +99,7 @@ and click on the `fork` button in the upper right-hand corner of the page.
 
 ## Clone a Git Repository
 
-The **git clone** command creates a local copy of a remotely hosted GitHub
+The `git clone` command creates a local copy of a remotely hosted GitHub
 repository.  So far, the `repy_v2` repository has only been copied and saved
 to the user's GitHub home page.  In the following example, the `repy_v2`
 `SeattleTestbed` repository is cloned to the user's local Git repository.
@@ -166,7 +168,9 @@ $ git branch
 * master
 ```
 
-Next, to add a new branch, which is the preferred method for working on and adding new features, type **git branch new_branch**, where **''new_branch**'' is the name of the new branch:
+Next, to add a new branch, which is the preferred method for working on and
+adding new features, type `git branch new_branch`, where `new_branch`
+is the name of the new branch:
 
 ```
 
@@ -185,7 +189,7 @@ new branch.
 
 Create a `LICENSE` file and save it to the local machine. You do this by
 opening a new document in a text editor and saving as `LICENSE` in the current
-directory. In the LICENSE file you can include an open-source license for the
+directory. In the `LICENSE` file you can include an open-source license for the
 project.  The MIT license is typically used for most of our lab's projects.
 
 The next step is to ask Git if it can find the `LICENSE` file, by asking it to
@@ -366,7 +370,7 @@ http://zackperdue.com/tutorials/super-useful-need-to-know-git-commands
 The section below lists some useful, common Git commands.
 
 
-To show changes/differences in the LICENSE that have not been committed:
+To show changes/differences in the `LICENSE` that have not been committed:
 
 ```
 $ git diff LICENSE
@@ -380,13 +384,14 @@ index 70a3d0f..93bce69 100644
 ```
 
 
-To mark LICENSE as removed and stage it for removal:
+To mark `LICENSE` as removed and stage it for removal:
 
 ```
 $ git rm LICENSE
 ```
 
-To unstage the modified LICENSE file and reset its contents to the current version on the repository:
+To unstage the modified `LICENSE` file and reset its contents to the current
+version on the repository:
 
 ```
 $ git reset HEAD LICENSE
