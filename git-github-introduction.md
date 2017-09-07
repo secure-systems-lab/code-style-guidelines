@@ -74,7 +74,7 @@ new repositories and fork ones that already exist on GitHub.
 A GitHub user account can be created at https://github.com/join
 
 Once users create their accounts, user-specific home pages are created. For
-example: https://github.com/<username>.  A user-specific home page can contain
+example: `https://github.com/<username>`.  A user-specific home page can contain
 repositories that the user has created or forked, contribution activity, and
 organizations he/she has joined.
 
@@ -362,13 +362,13 @@ The following page provides a comprehensive guide on resolving merge conflicts:
 https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/
 
 ## Miscellaneous Git commands
-Typing `git help -a` on the command-line outputs the full list of commands supported by Git.
-Consult Git's help pages for more information about each command.
-Another resource that covers useful Git commands can be found here:
-http://zackperdue.com/tutorials/super-useful-need-to-know-git-commands
+
+Typing `git help -a` on the command-line outputs the full list of commands
+supported by Git.  Consult Git's help pages for more information about each
+command.  [Zackperdue.com](http://zackperdue.com/tutorials/super-useful-need-to-know-git-commands)
+is another resource that covers useful Git commands.
 
 The section below lists some useful, common Git commands.
-
 
 To show changes/differences in the `LICENSE` that have not been committed:
 
