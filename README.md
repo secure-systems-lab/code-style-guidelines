@@ -91,6 +91,41 @@ Use blank lines in functions to indicate logical sections and help to offset
 comments.
 
 
+### Nesting ###
+
+Where possible, for readability, avoid employing excessive levels of nesting
+and `if` and `else` clauses separated by a lot of code.
+
+  No:
+
+```python
+if bizbaz:
+  bizbaz.frobnicate(flimflam)
+  print('Frobnication result: ' + repr(bizbaz))
+  ...
+  ...
+  ...
+else:
+  raise YamException(...)
+```
+
+  Yes:
+```python
+  if not bizbaz:
+    raise YamException(...)
+
+  bizbaz.frobnicate(flimflam)
+  print('Frobnication result: ' + repr(bizbaz))
+  ...
+  ...
+  ...
+```
+
+If the not-bizbaz clause isn't going to return or raise an exception right away
+and you therefore need both `if` and `else`, it's slightly preferable to keep
+the shorter clause first, so that the `else` isn't too far from the `if`.
+
+
 ## Imports ##
 
 Imports should usually be on separate lines, e.g.:
