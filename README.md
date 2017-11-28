@@ -682,9 +682,9 @@ print("Hello, Mr. " + surname)
 ```
 
 The majority of static analysis tools complain if a variable is assigned but not used thereafter.
-By convention, unused variables are assigned to `i`, `j`, `k`, and `_` (underscore character) and
-understood as such.  However, we think `junk` is more readable than `_` and easier for newcomers
-to understand. 
+By convention, unused values are assigned to `i`, `j`, `k`, and `_` (underscore character) and
+are understood as such.  However, we think `junk` is more readable than `_` and easier for
+newcomers to understand. 
 
 ### Exception Names ###
 
