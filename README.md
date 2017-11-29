@@ -650,7 +650,41 @@ underscore if a separation is needed, such as: popanitem or pop_an_item
         
 Variables which are set once and never change value should be all upper case,
 if a seperator is needed use an underscore.
-      
+
+### Ignored Values ###
+
+The variable name `junk` should be used in cases where a returned valued must be
+stored but the variable itself is unneeded.
+
+  Yes:
+```Python
+junk, surname = get_full_name()
+print("Hello, Mr. " + surname)
+```
+
+  No:
+
+```Python
+for _ in range(10):     
+  do_something()
+```
+
+  Yes:
+```Python
+for i in range(10):
+  print(i)
+```
+
+  No:
+```Python
+firstname, surname = get_full_name()
+print("Hello, Mr. " + surname)
+```
+
+The majority of tools for static code analysis complain if a variable is assigned but not used thereafter.
+By convention, unused values are assigned to `i`, `j`, `k`, and `_` (underscore character) and
+are understood as such.  However, we think `junk` is more readable than `_` and easier for
+newcomers to understand. 
 
 ### Exception Names ###
 
