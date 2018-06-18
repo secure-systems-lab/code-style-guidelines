@@ -472,15 +472,15 @@ than lines of code!
 ## Documentation Strings ##
 
 Conventions for writing good documentation strings (a.k.a. "docstrings")
-are immortalized in [http://www.python.org/dev/peps/pep-0257/ PEP 257]
+are immortalized in [PEP 257](http://www.python.org/dev/peps/pep-0257/).
 
 Write docstrings for all public modules, functions, classes, and methods.
 Docstrings are not necessary for non-public methods, but you should have a
 comment that describes what the method does.  This comment should appear after
-the "def" line.
+the `def` line.
 
 
-Note that most importantly, the """ that ends a multiline docstring should be
+Note that most importantly, the `"""` that ends a multiline docstring should be
 on a line by itself, and preferably preceded by a blank line, e.g.:
 
 ```python
@@ -497,7 +497,8 @@ line.
 
 Example documentation strings for files, modules, and classes.
 
-Each module should have a header block that specifies its file name and explains the purpose (and any caveats or issues) of the module.
+Each module should have a header block that specifies its file name and
+explains the purpose (and any caveats or issues) of the module.
 
 ```python
 """
@@ -681,10 +682,11 @@ firstname, surname = get_full_name()
 print("Hello, Mr. " + surname)
 ```
 
-The majority of tools for static code analysis complain if a variable is assigned but not used thereafter.
-By convention, unused values are assigned to `i`, `j`, `k`, and `_` (underscore character) and
-are understood as such.  However, we think `junk` is more readable than `_` and easier for
-newcomers to understand. 
+The majority of tools for static code analysis complain if a variable is
+assigned but not used thereafter. By convention, unused values are assigned
+to `i`, `j`, `k`, and `_` (underscore character) and are understood as such.
+However, we think `junk` is more readable than `_` and easier for newcomers
+to understand. 
 
 ### Exception Names ###
 
@@ -1071,7 +1073,7 @@ else:
 
 Writing the code the first way is hard for someone to read.   The second two
 ways make it more clear that you are relying on the short circuit evaluation to
-perform or avoid the evaluation of the askokcancel function.
+perform or avoid the evaluation of the `askokcancel` function.
 
 
 ### Don't use os.popen or os.system ###
