@@ -17,6 +17,7 @@ Please at least consider the points made here."
 - [Placing braces and spaces](#braces-and-spaces)
 - [Spaces](#spaces)
 - [Naming](#naming)
+- [Typedefs](#typedefs)
 
 <a name="introduction"/></a>
 # Introduction
@@ -288,7 +289,7 @@ alignof, and \_\_attribute\_\_, when using the form resembling functions.
 
 So use a space after these keywords:
 
-	if, switch, case, for, do, while
+> if, switch, case, for, do, while
 
 but not with the function-resembling forms of sizeof, typeof, alignof,
 or \_\_attribute\_\_. E.g.,
@@ -320,19 +321,19 @@ char *match_strdup(substring_t *s);
 Use one space around (on each side of) most binary and ternary
 operators, such as any of these:
 
-	=  +  -  <  >  *  /  %  |  &  ^  <=  >=  ==  !=  ?  :
+> =  +  -  <  >  *  /  %  |  &  ^  <=  >=  ==  !=  ?  :
 
 but no space after unary operators:
 
-	&  *  +  -  ~  !  sizeof  typeof  alignof  __attribute__  defined
+> &  *  +  -  ~  !  sizeof  typeof  alignof  __attribute__  defined
 
 no space before the postfix increment & decrement unary operators:
 
-	++  --
+> ++  --
 
 no space after the prefix increment & decrement unary operators:
 
-	++  --
+> ++  --
 
 and no space around the `.` and `->` structure member operators.
 
@@ -354,46 +355,48 @@ fail by changing their context lines.
 C is a Spartan language, and so should your naming be. Unlike Modula-2
 and Pascal programmers, C programmers do not use cute names like
 ThisVariableIsATemporaryCounter. A C programmer would call that variable
-`tmp`, which is much easier to write, and not the least more difficult
+`cnt`, which is much easier to write, and not the least more difficult
 to understand.
 
 HOWEVER, while mixed-case names are frowned upon, descriptive names for
-global variables are a must. To call a global function `foo` is a
-shooting offense.
+file-scope identifiers are a must. To call an externally visible function
+`f()` is a shooting offense.
 
-GLOBAL variables (to be used only if you **really** need them) need to
-have descriptive names, as do global functions. If you have a function
-that counts the number of active users, you should call that
-`count_active_users()` or similar, you should **not** call it
-`cntusr()`.
+**FILE-SCOPE** variables (to be used only if you **really** need them) need to
+have descriptive names, as do functions. If you have a function that counts
+the number of active users, you should call that `count_active_users()` or
+similar, you should **not** call it `cntusr()`.
 
 Encoding the type of a function into the name (so-called Hungarian
-notation) is brain damaged - the compiler knows the types anyway and can
-check those, and it only confuses the programmer. No wonder MicroSoft
-makes buggy programs.
+notation) is pointless --- the compiler knows the types anyway and can
+check those, so it only serves to confuse the programmer.
 
-LOCAL variable names should be short, and to the point. If you have some
+**LOCAL** variable names should be short, and to the point. If you have some
 random integer loop counter, it should probably be called `i`. Calling
-it `loop_counter` is non-productive, if there is no chance of it being
+it `loop_counter` is non-productive if there is no chance of it being
 mis-understood. Similarly, `tmp` can be just about any type of variable
 that is used to hold a temporary value.
 
 If you are afraid to mix up your local variable names, you have another
 problem, which is called the function-growth-hormone-imbalance syndrome.
-See chapter 6 (Functions).
+See section 6 ([Functions](#functions)).
 
+<a name="typedefs"/></a>
 # 5\) Typedefs
 
-Please don't use things like `vps_t`. It's a **mistake** to use typedef
-for structures and pointers. When you see a
+Please don't use things like `vps_t`. It's a **mistake** to use `typedef`
+for non-opaque structures and pointers. When you see a
 
 ``` c
+/* BAD */
 vps_t a;
 ```
 
-in the source, what does it mean? In contrast, if it says
+in the source, what does it mean? Is it a `struct`? A `union`? A function
+pointer? In contrast, if it says
 
 ``` c
+/* good */
 struct virtual_container *a;
 ```
 
