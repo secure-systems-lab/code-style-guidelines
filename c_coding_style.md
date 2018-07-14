@@ -119,7 +119,7 @@ to hide:
 ``` c
 /* BAD */
 if (condition) do_this;
-  do_something_everytime;
+ do_something_everytime;
 ```
 
 Don't put multiple assignments on a single line either. Avoid tricky
