@@ -5,10 +5,12 @@ C code for the projects of the [Secure Systems Lab](https://ssl.engineering.nyu.
 in the NYU Tandon School of Engineering.
 
 These guidelines are based on a document describing [the preferred coding style](https://www.kernel.org/doc/html/v4.10/process/coding-style.html)
-for the Linux kernel. As the document states, "coding style is very personal,
-and I won't **force** my views on anybody, but this is what goes for anything that
-I have to be able to maintain, and I'd prefer it for most other things too.
-Please at least consider the points made here."
+for the Linux kernel. As the document states:
+
+> "Coding style is very personal, and I won't **force** my views on anybody
+> but this is what goes for anything that I have to be able to maintain, and
+> I'd prefer it for most other things too. Please at least consider the points
+> made here."
 
 ## Table of Contents ##
 - [Introduction](#introduction)
