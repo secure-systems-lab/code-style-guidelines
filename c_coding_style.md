@@ -704,7 +704,7 @@ the code and it's prone to breakage from seemingly innocent changes.
 c\) Macros with arguments that are used as lvalues:
 
 ```c
-/* bad */
+/* BAD */
 FOO(x) = y;
 ```
 
