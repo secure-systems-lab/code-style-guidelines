@@ -552,7 +552,6 @@ int fun(int a)
 	buffer = kmalloc(SIZE, GFP_KERNEL);
 	if (!buffer) {
 		return -ENOMEM;
-
 	}
 
 	do_stuff();
