@@ -143,14 +143,16 @@ available tools.
 The limit on the length of lines is 80 columns and this is a strongly
 preferred limit.
 
-Statements longer than 80 columns will be broken into sensible chunks,
+Statements longer than 80 columns should be broken into sensible chunks,
 unless exceeding 80 columns significantly increases readability and does
-not hide information. Descendants are always substantially shorter than
-the parent and are placed substantially to the right. The same applies
-to function headers with a long argument list. However, never break
-user-visible strings such as printk messages, because that breaks the
-ability to grep for them.
+not hide information. If this happens to be the case, descendants should
+always be substantially shorter than the parent and should be placed
+substantially to the right. The same applies to function headers with
+a long argument list. However, never break user-visible strings such as
+`puts()` or `printf()` messages, because that breaks the ability to grep for
+them.
 
+<a name="braces-and-spaces"/></a>
 # 3\) Placing Braces and Spaces
 
 The other issue that always comes up in C styling is the placement of
