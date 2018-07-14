@@ -664,11 +664,11 @@ resembles a function call):
 
 ```c
 /* good */
-#define macrofun(a, b, c)		\
-	do {						\
+#define macrofun(a, b, c)			\
+	do {					\
 		if ((a) == 5) {			\
 			do_this((b), (c));	\
-		}						\
+		}				\
 	} while (0)
 ```
 
@@ -678,12 +678,12 @@ a\) Macros that affect control flow:
 
 ```c
 /* good */
-#define FOO(x)							\
-	do {								\
+#define FOO(x)					\
+	do {					\
 		int i = (x) & FATAL_SIG_MASK;	\
-		if (blah(i) < 0) {				\
-			return -EBUGGERED;			\
-		}								\
+		if (blah(i) < 0) {		\
+			return -EBUGGERED;	\
+		}				\
 	} while (0)
 ```
 
@@ -726,10 +726,10 @@ resembling functions (such as GNU statement expressions):
 ```c
 /* BAD */
 #define FOO(x)			\
-({						\
+({				\
 	typeof(x) ret;		\
 	ret = calc_ret(x);	\
-	(ret);				\
+	(ret);			\
 })
 ```
 
