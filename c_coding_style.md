@@ -50,27 +50,28 @@ code, and when you stop unconsciously judging code by its style you start
 judging code by its **worth**. Mistakes start to jump out at you, and you begin to
 see useful patterns that can be applied to other areas of the codebase.
 
-So please do keep this in mind while reading this document; there is a
-higher purpose to all of this, I promise. And even more important to keep
-in mind is that these are all **guidelines** and not unbreakable rules. They
-are meant to help, not oppress, so if breaking a rule or two keeps your
-code from becoming a jumbled mess, don't hesitate to do so. For example,
-it's almost certainly possible for single 90 character conditional to be
-easier read than a shorter, but multi-line, one. There will **always** exceptions
-like this for the guidelines which follow, and we are all intelligent adults
-here who can judgment calls when required, so never be afraid to exercise
-common sense.
+So please keep that in mind while reading this document; there is a higher
+purpose to all of this, I promise.
+
+Finally, remember that these are all **guidelines** and not unbreakable
+rules. They are meant to help, not oppress, so if breaking a rule or
+two keeps your code from becoming a jumbled mess, don't hesitate to do
+so. It's almost certainly possible for single 90 character conditional
+to be easier read than a shorter, but multi-line, one. There will **always**
+exceptions like this for the guidelines which follow, and we are all
+intelligent adults here who can judgment calls when required, so never
+be afraid to exercise common sense.
 
 Nonetheless, if there are any guidelines here which you absolutely cannot
 stand, or if there are any grave pragmatic or security concerns regarding any
 of these guidelines, please don't hesitate to direct any feedback to
-@alyptik
+@alyptik (Joey Pabalinas <joeypabalinas@gmail.com>).
 
-About half of the document is verbatim from the Linux kernel coding
-style (of which I am a staunch believer in, as you cout probably tell), but
-there are guidelines which I felt need to be modified to better reflect the
-difference in goals and types of codebases worked on by the NYU Tandon School
-of Engineering.
+About half of the document is verbatim from the Linux kernel coding style
+guidelines (of which I am a staunch believer in, as you can probably
+tell), but there were guidelines which I felt need to be modified to better
+reflect the differences in goals and project types worked on by the NYU Tandon
+School of Engineering.
 
 <a name="indentation"/></a>
 # 1\) Indentation
@@ -455,7 +456,6 @@ useful only for:
 
 	   When editing existing code which already uses one or the other set
 	   of types, you should conform to the existing choices in that code.
-
 
 Maybe there are other cases too, but the rule should basically be to
 NEVER EVER use a typedef unless you can clearly match one of those
