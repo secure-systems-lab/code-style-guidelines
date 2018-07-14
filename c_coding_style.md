@@ -43,12 +43,13 @@ finding all the pictures containing cars comes to mind), and this is just
 as true when it comes to reading computer code; both our own as well as
 code written by others.
 
-When reading code with consistent style, the repetitiveness tricks you into
+When reading code with consistent style, its repetitiveness tricks you into
 tuning out the style completely: your brain no longer considers it important
-to care about and you are able to see the deeper structure and semantics of
-code, and when you stop unconsciously judging code by its style you start
-judging code by its **worth**. Mistakes start to jump out at you, and you begin to
-see useful patterns that can be applied to other areas of the codebase.
+important to bother caring about and you begin to notice strange code structure
+or missing semantics. When you stop unconsciously judging code by how much you
+like or dislike its style you naturally start judging code by its **worth
+instead**. Mistakes start to jump out at you, and you begin to see useful,
+reusable solutions that you had previously overlooked.
 
 So please keep that in mind while reading this document; there is a higher
 purpose to all of this, I promise.
