@@ -209,10 +209,7 @@ int function(int x)
 }
 ```
 
-Heretic people all over the world have claimed that this inconsistency
-is … well … inconsistent, but all right-thinking people know that
-(a) K\&R are **right** and (b) K\&R are right. Besides, functions are
-special anyway (you can't nest them in C).
+Functions are special; you can't nest them in standard C.
 
 Note that the closing brace is empty on a line of its own, **except** in
 the cases where it is followed by a continuation of the same statement,
