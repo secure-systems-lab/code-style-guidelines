@@ -71,9 +71,9 @@ of Engineering.
 Tabs are 8 characters, and thus indentations are also 8 characters.
 There are heretic movements that try to make indentations 4 (or even
 2\!) characters deep, and that is akin to trying to define the value of
-PI to be 3.
+π to be 3.
 
-Rationale: The whole idea behind indentation is to clearly define where
+**Rationale:** The whole idea behind indentation is to clearly define where
 a block of control starts and ends. Especially when you've been looking
 at your screen for 20 straight hours, you'll find it a lot easier to see
 how the indentation works if you have large indentations.
@@ -84,30 +84,32 @@ the code move too far to the right, and makes it hard to read on a
 more than 3 levels of indentation, you're screwed anyway, and should fix
 your program.
 
-In short, 8-char indents make things easier to read, and have the added
-benefit of warning you when you're nesting your functions too deep. Heed
-that warning.
+In short, 8 character indents make things easier to read, and have the
+added benefit of warning you when you're nesting your code blocks too deep.
+
+Heed that warning.
 
 The preferred way to ease multiple indentation levels in a switch
 statement is to align the `switch` and its subordinate `case` labels in
 the same column instead of `double-indenting` the `case` labels. E.g.:
 
 ``` c
+/* good */
 switch (suffix) {
 case 'G':
 case 'g':
-    mem <<= 30;
-    break;
+	mem <<= 30;
+	break;
 case 'M':
 case 'm':
-    mem <<= 20;
-    break;
+	mem <<= 20;
+	break;
 case 'K':
 case 'k':
-    mem <<= 10;
-    /* fall through */
+	mem <<= 10;
+	/* fall through */
 default:
-    break;
+	break;
 }
 ```
 
@@ -115,19 +117,24 @@ Don't put multiple statements on a single line unless you have something
 to hide:
 
 ``` c
+/* BAD */
 if (condition) do_this;
   do_something_everytime;
 ```
 
-Don't put multiple assignments on a single line either. Kernel coding
-style is super simple. Avoid tricky expressions.
+Don't put multiple assignments on a single line either. Avoid tricky
+expressions. Keep your coding style simple, stupid™.
 
-Outside of comments, documentation and except in Kconfig, spaces are
-never used for indentation, and the above example is deliberately
-broken.
+Don't leave whitespace at the end of lines; they can make applying those
+diffs more, well, difficult, and most editors these days have features
+to quickly remove all trailing whitespace from a document.
 
-Get a decent editor and don't leave whitespace at the end of lines.
+Outside of comments and documentation, spaces should never be used for
+indentation, and the above example is deliberately broken. It's much
+easier to avoid mixed and incorrect indentation with tabs, as well as
+to modify or remove indentation levels.
 
+<a name="long-lines"/></a>
 # 2\) Breaking long lines and strings
 
 Coding style is all about readability and maintainability using commonly
