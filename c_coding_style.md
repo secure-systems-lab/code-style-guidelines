@@ -79,7 +79,7 @@ School of Engineering.
 Tabs are 8 characters, and thus indentations are also 8 characters.
 There are heretic movements that try to make indentations 4 (or even
 2\!) characters deep, and that is akin to trying to define the value of
-π to be 3.
+pi to be 3.
 
 **Rationale:** The whole idea behind indentation is to clearly define where
 a block of control starts and ends. Especially when you've been looking
@@ -209,7 +209,7 @@ int function(int x)
 ```
 
 Heretic people all over the world have claimed that this inconsistency
-is ... well ... inconsistent, but all right-thinking people know that
+is … well … inconsistent, but all right-thinking people know that
 (a) K\&R are **right** and (b) K\&R are right. Besides, functions are
 special anyway (you can't nest them in C).
 
@@ -285,7 +285,7 @@ if ((err = SSLHashSHA1.update(&hashCtx, &signedParams)) != 0)
 if ((err = SSLHashSHA1.final(&hashCtx, &hashOut)) != 0)
     goto fail;
 
-err = sslRawVerify(...);
+err = sslRawVerify(…);
 ```
 
 are very easily prevented.
@@ -296,15 +296,15 @@ It's **always** better to code defensively, no matter how careful you **think** 
 ## 3.1) Spaces
 
 The use of spaces depends (mostly) on function-versus-keyword usage. Use a
-space after (most) keywords. The notable exceptions are sizeof, typeof,
-alignof, and \_\_attribute\_\_, when using the form resembling functions.
+space after (most) keywords. The notable exceptions are `sizeof()`, `typeof()`,
+`alignof()`, and `__attribute__()`, when using the form resembling functions.
 
 So use a space after these keywords:
 
 > if, switch, case, for, do, while
 
-but not with the function-resembling forms of sizeof, typeof, alignof,
-or \_\_attribute\_\_.
+but not with the function-resembling forms of `sizeof()`, `typeof()`,
+`alignof()`, and `__attribute__()`.
 
 e.g.:
 
@@ -339,7 +339,7 @@ operators, such as any of these:
 
 but no space after unary operators:
 
-> &  *  +  -  ~  !  sizeof  typeof  alignof  __attribute__  defined
+> &  *  +  -  ~  !  `sizeof()`  `typeof()`  `alignof()`  `__attribute__()`  `defined()`
 
 no space before the postfix increment & decrement unary operators:
 
@@ -368,7 +368,7 @@ fail by changing their context lines.
 
 C is a Spartan language, and so should your naming be. Unlike Modula-2
 and Pascal programmers, C programmers do not use cute names like
-ThisVariableIsATemporaryCounter. A C programmer would call that variable
+`ThisVariableIsATemporaryCounter`. A C programmer would call that variable
 `cnt`, which is much easier to write, and not the least more difficult
 to understand.
 
@@ -388,7 +388,7 @@ check those, so it only serves to confuse the programmer.
 **LOCAL** variable names should be short, and to the point. If you have some
 random integer loop counter, it should probably be called `i`. Calling
 it `loop_counter` is non-productive if there is no chance of it being
-mis-understood. Similarly, `tmp` can be just about any type of variable
+misunderstood. Similarly, `tmp` can be just about any type of variable
 that is used to hold a temporary value.
 
 If you are afraid to mix up your local variable names, you have another
@@ -433,7 +433,7 @@ useful only for:
 	b) Clear integer types, where the abstraction _helps_ avoid
 	   confusion whether it is `int` or `long`.
 
-	   u8/u16/u32 are perfectly fine typedefs, although they fit into
+	   `u8`/`u16`/`u32` are perfectly fine typedefs, although they fit into
 	   category (c) better than here.
 
 	   Again - there needs to be a reason for this. If something is
@@ -751,7 +751,7 @@ success).
 Mixing up these two sorts of representations is a fertile source of
 difficult-to-find bugs. If the C language included a strong distinction
 between integers and booleans then the compiler would find these
-mistakes for us... but it doesn't. To help prevent such bugs, always
+mistakes for us… but it doesn't. To help prevent such bugs, always
 follow this convention:
 
 > If the name of a function is an action or an imperative command,
@@ -782,18 +782,18 @@ files. The compiler will avoid generating any code for the stub calls,
 producing identical results, but the logic will remain easy to follow.
 
 Prefer to compile out entire functions, rather than portions of
-functions or portions of expressions. Rather than putting an ifdef in an
+functions or portions of expressions. Rather than putting an `#ifdef` in an
 expression, factor out part or all of the expression into a separate
 helper function and apply the conditional to that function.
 
 At the end of any non-trivial `#if` or `#ifdef` block (more than a few
-lines), place a comment after the \#endif on the same line, noting the
+lines), place a comment after the `#endif` on the same line, noting the
 conditional expression used. For instance:
 
 ``` c
 /* good */
 #ifdef CONFIG_SOMETHING
-...
+…
 #endif /* CONFIG_SOMETHING */
 ```
 <a name="references"/></a>
