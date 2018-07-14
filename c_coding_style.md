@@ -661,7 +661,7 @@ resembles a function call):
 
 ##### Things to avoid when using macros:
 
-a\) Macros that affect control flow:
+a) Macros that affect control flow:
 
 ```c
 /* good */
@@ -678,24 +678,24 @@ are a **very** bad idea. It looks like a function call but exits the
 **calling** function; don't break the mental parsers of those who will
 read the code.
 
-b\) Macros that depend on having a local variable with a magic name:
+b) Macros that depend on having a local variable with a magic name:
 
 ```c
 /* BAD */
-#define FOO(val) bar(magic_index, val)
+#define FOO(val) bar(magic_index, (val))
 ```
 
 might look like a good thing, but it's confusing as hell when one reads
 the code and it's prone to breakage from seemingly innocent changes.
 
-c\) Macros with arguments that are used as lvalues:
+c) Macros with arguments that are used as lvalues:
 
 ```c
 /* BAD */
 FOO(x) = y;
 ```
 
-**will** bite you if somebody e.g. turns `FOO()` into an inline function.
+**will** bite you if somebody changes `FOO()` into an inline function.
 
 d\) Forgetting about precedence: macros defining constants using
 expressions must enclose the expression in parentheses. Beware of
@@ -707,21 +707,30 @@ similar issues with macros using parameters.
 #define CONSTEXP (SOME_CONSTANT|OTHER_CONSTANT)
 ```
 
-e\) Namespace collisions when defining local variables in macros
+e) Namespace collisions when defining local variables in macros
 resembling functions (such as GNU statement expressions):
 
 ```c
 /* BAD */
-#define FOO(x)			\
-({				\
-	typeof(x) ret;		\
-	ret = calc_ret(x);	\
-	(ret);			\
-})
+#define STATEMENT_EXPR(x)		\
+	({				\
+		typeof(x) ret;		\
+		ret = calc_ret(x);	\
+		(ret);			\
+	})
 ```
 
-`ret` is a common name for a local variable - `__foo_ret` is less likely
+`ret` is a common name for a local variable - `__max_ret` is less likely
 to collide with an existing variable.
+```c
+/* good */
+#define STATEMENT_EXPR(x)					\
+	({							\
+		typeof(x) __max_ret;				\
+		__max_ret = max_t(typeof(x), (x), FD_MAX);	\
+		(__max_ret);					\
+	})
+```
 
 <a name="function-return-and-names"/></a>
 # 10\) Function return values and names
