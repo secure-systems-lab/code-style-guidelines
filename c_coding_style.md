@@ -102,8 +102,6 @@ The preferred way to ease multiple indentation levels in a switch
 statement is to align the `switch` and its subordinate `case` labels in
 the same column instead of `double-indenting` the `case` labels.
 
-e.g.:
-
 ``` c
 /* good */
 switch (suffix) {
@@ -181,8 +179,6 @@ if (x_is_true) {
 
 This applies to all non-function statement blocks (`if`, `switch`, `for`,
 `while`, `do`).
-
-e.g.:
 
 ``` c
 /* good */
@@ -303,8 +299,6 @@ So use a space after these keywords:
 
 but not with the function-resembling forms of `sizeof()`, `typeof()`,
 `alignof()`, and `__attribute__()`.
-
-e.g.:
 
 ``` c
 /* good */
@@ -492,9 +486,6 @@ understand what you did 2 weeks from now.
 
 In source files, separate functions with one blank line.
 
-e.g.:
-
-
 ```c
 /* good */
 int system_is_up(void)
@@ -583,7 +574,6 @@ out_no_free:
 A common type of bug to be aware of are "one `err` bugs" which look like
 this:
 
-
 ``` c
 /* BAD */
 err:
@@ -658,7 +648,6 @@ macros resembling functions.
 Macros with multiple statements should be enclosed in a do - while block
 to allow it for a semicolon when used (so that `macrofun(x, y, z);`
 resembles a function call):
-
 
 ```c
 /* good */
