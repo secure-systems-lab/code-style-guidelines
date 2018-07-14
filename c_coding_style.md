@@ -20,6 +20,11 @@ Please at least consider the points made here."
 - [Typedefs](#typedefs)
 - [Functions](#functions)
 - [Centralized exiting of functions](#function-exit)
+- [Commenting](#commenting)
+- [Macros](#macros)
+- [Function return values and names](#function-return-and-names)
+- [Conditional Compilation](#conditional-compilation)
+- [References](#refernces)
 
 <a name="introduction"/></a>
 # Introduction
@@ -489,16 +494,17 @@ In source files, separate functions with one blank line.
 
 e.g.:
 
+
 ```c
 /* good */
 int system_is_up(void)
 {
-    return system_state == SYSTEM_RUNNING;
+	return system_state == SYSTEM_RUNNING;
 }
 
 int system_is_dowm(void)
 {
-    return system_state == SYSTEM_DOWN;
+	return system_state == SYSTEM_DOWN;
 }
 ```
 
@@ -509,11 +515,11 @@ it is a simple way to add valuable information for the reader.
 <a name="function-exit"/></a>
 # 7\) Centralized exiting of functions
 
-Albeit deprecated by some people, the equivalent of the goto statement
+Albeit deprecated by some people, the equivalent of the `goto` statement
 is used frequently by compilers in form of the unconditional jump
 instruction.
 
-The goto statement comes in handy when a function exits from multiple
+The `goto` statement comes in handy when a function exits from multiple
 locations and some common work such as cleanup has to be done. If there
 is no cleanup needed then just return directly.
 
@@ -525,46 +531,69 @@ they make correctness difficult to verify anyway.
 
 The rationale for using gotos is:
 
-  - unconditional statements are easier to understand and follow
-  - nesting is reduced
-  - errors by not updating individual exit points when making
-    modifications are prevented
-  - saves the compiler work to optimize redundant code away ;)
+	- Unconditional statements are easier to understand and follow.
+	- Nesting is reduced.
+	- Errors by not updating individual exit points when making
+	  modifications are prevented.
+	- Saves the compiler work to optimize redundant code away.
 
-<!-- end list -->
+	<!-- end list -->
+
+So use them in situations like this to avoid making already confusing code
+even more complicated:
 
 ``` c
+/* good */
 int fun(int a)
 {
-    int result = 0;
-    char *buffer;
+	int result = 0;
+	char *buffer;
 
-    buffer = kmalloc(SIZE, GFP_KERNEL);
-    if (!buffer)
-        return -ENOMEM;
+	buffer = kmalloc(SIZE, GFP_KERNEL);
+	if (!buffer) {
+		return -ENOMEM;
 
-    if (condition1) {
-        while (loop1) {
-            ...
-        }
-        result = 1;
-        goto out_free_buffer;
-    }
-    ...
+	}
+
+	do_stuff();
+	if (condition) {
+		result = 1;
+		kfree(buffer);
+		while (other_condition) {
+			do_other_stuff();
+		}
+		goto out_no_free;
+	}
+
+	if (!do_even_more_stuff()) {
+		goto out_free_buffer;
+	}
+
+	for (;;) {
+		if (loop_predicate()) {
+			break;
+		}
+	}
+
+	result = 2;
 out_free_buffer:
-    kfree(buffer);
-    return result;
+	kfree(buffer);
+out_no_free:
+	return result;
 }
 ```
 
-A common type of bug to be aware of is `one err bugs` which look like
+A common type of bug to be aware of are "one `err` bugs" which look like
 this:
 
+
 ``` c
+/* BAD */
 err:
-    kfree(foo->bar);
-    kfree(foo);
-    return ret;
+	/* foo might be NULL */
+	kfree(foo->bar);
+	kfree(foo);
+	return ret;
 ```
 
 The bug in this code is that on some exit paths `foo` is NULL. Normally
@@ -572,15 +601,17 @@ the fix for this is to split it up into two error labels `err_free_bar:`
 and `err_free_foo:`:
 
 ``` c
+/* good */
 err_free_bar:
-   kfree(foo->bar);
+	kfree(foo->bar);
 err_free_foo:
-   kfree(foo);
-   return ret;
+	kfree(foo);
+	return ret;
 ```
 
 Ideally you should simulate errors to test all exit paths.
 
+<a name="commenting"/></a>
 # 8\) Commenting
 
 Comments are good, but there is also a danger of over-commenting. NEVER
@@ -596,170 +627,24 @@ comments to note or warn about something particularly clever (or ugly),
 but try to avoid excess. Instead, put the comments at the head of the
 function, telling people what it does, and possibly WHY it does it.
 
-When commenting the kernel API functions, please use the kernel-doc
-format. See the files at <span data-role="ref">Documentation/doc-guide/
-\<doc\_guide\></span> and `scripts/kernel-doc` for details.
-
 The preferred style for long (multi-line) comments is:
 
 ``` c
 /*
  * This is the preferred style for multi-line
- * comments in the Linux kernel source code.
- * Please use it consistently.
+ * comments in your source code. Please use
+ * it consistently.
  *
  * Description:  A column of asterisks on the left side,
  * with beginning and ending almost-blank lines.
  */
 ```
 
-For files in net/ and drivers/net/ the preferred style for long
-(multi-line) comments is a little different.
-
-``` c
-/* The preferred comment style for files in net/ and drivers/net
- * looks like this.
- *
- * It is nearly the same as the generally preferred comment style,
- * but there is no initial almost-blank line.
- */
-```
-
 It's also important to comment data, whether they are basic types or
-derived types. To this end, use just one data declaration per line (no
-commas for multiple data declarations). This leaves you room for a small
-comment on each item, explaining its use.
+derived types.
 
-# 9\) You've made a mess of it
-
-That's OK, we all do. You've probably been told by your long-time Unix
-user helper that `GNU emacs` automatically formats the C sources for
-you, and you've noticed that yes, it does do that, but the defaults it
-uses are less than desirable (in fact, they are worse than random typing
-- an infinite number of monkeys typing into GNU emacs would never make a
-good program).
-
-So, you can either get rid of GNU emacs, or change it to use saner
-values. To do the latter, you can stick the following in your .emacs
-file:
-
-``` sourceCode none
-(defun c-lineup-arglist-tabs-only (ignored)
-  "Line up argument lists by tabs, not spaces"
-  (let* ((anchor (c-langelem-pos c-syntactic-element))
-         (column (c-langelem-2nd-pos c-syntactic-element))
-         (offset (- (1+ column) anchor))
-         (steps (floor offset c-basic-offset)))
-    (* (max steps 1)
-       c-basic-offset)))
-
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            ;; Add kernel style
-            (c-add-style
-             "linux-tabs-only"
-             '("linux" (c-offsets-alist
-                        (arglist-cont-nonempty
-                         c-lineup-gcc-asm-reg
-                         c-lineup-arglist-tabs-only))))))
-
-(add-hook 'c-mode-hook
-          (lambda ()
-            (let ((filename (buffer-file-name)))
-              ;; Enable kernel mode for the appropriate files
-              (when (and filename
-                         (string-match (expand-file-name "~/src/linux-trees")
-                                       filename))
-                (setq indent-tabs-mode t)
-                (setq show-trailing-whitespace t)
-                (c-set-style "linux-tabs-only")))))
-```
-
-This will make emacs go better with the kernel coding style for C files
-below `~/src/linux-trees`.
-
-But even if you fail in getting emacs to do sane formatting, not
-everything is lost: use `indent`.
-
-Now, again, GNU indent has the same brain-dead settings that GNU emacs
-has, which is why you need to give it a few command line options.
-However, that's not too bad, because even the makers of GNU indent
-recognize the authority of K\&R (the GNU people aren't evil, they are
-just severely misguided in this matter), so you just give indent the
-options `-kr -i8` (stands for `K&R, 8 character indents`), or use
-`scripts/Lindent`, which indents in the latest style.
-
-`indent` has a lot of options, and especially when it comes to comment
-re-formatting you may want to take a look at the man page. But remember:
-`indent` is not a fix for bad programming.
-
-Note that you can also use the `clang-format` tool to help you with
-these rules, to quickly re-format parts of your code automatically, and
-to review full files in order to spot coding style mistakes, typos and
-possible improvements. It is also handy for sorting `#includes`, for
-aligning variables/macros, for reflowing text and other similar tasks.
-See the file
-<span data-role="ref">Documentation/process/clang-format.rst
-\<clangformat\></span> for more details.
-
-# 10\) Kconfig configuration files
-
-For all of the Kconfig\* configuration files throughout the source tree,
-the indentation is somewhat different. Lines under a `config` definition
-are indented with one tab, while help text is indented an additional two
-spaces. Example:
-
-    config AUDIT
-      bool "Auditing support"
-      depends on NET
-      help
-        Enable auditing infrastructure that can be used with another
-        kernel subsystem, such as SELinux (which requires this for
-        logging of avc messages output).  Does not do system-call
-        auditing without CONFIG_AUDITSYSCALL.
-
-Seriously dangerous features (such as write support for certain
-filesystems) should advertise this prominently in their prompt string:
-
-    config ADFS_FS_RW
-      bool "ADFS write support (DANGEROUS)"
-      depends on ADFS_FS
-      ...
-
-For full documentation on the configuration files, see the file
-Documentation/kbuild/kconfig-language.txt.
-
-# 11\) Data structures
-
-Data structures that have visibility outside the single-threaded
-environment they are created and destroyed in should always have
-reference counts. In the kernel, garbage collection doesn't exist (and
-outside the kernel garbage collection is slow and inefficient), which
-means that you absolutely **have** to reference count all your uses.
-
-Reference counting means that you can avoid locking, and allows multiple
-users to have access to the data structure in parallel - and not having
-to worry about the structure suddenly going away from under them just
-because they slept or did something else for a while.
-
-Note that locking is **not** a replacement for reference counting.
-Locking is used to keep data structures coherent, while reference
-counting is a memory management technique. Usually both are needed, and
-they are not to be confused with each other.
-
-Many data structures can indeed have two levels of reference counting,
-when there are users of different `classes`. The subclass count counts
-the number of subclass users, and decrements the global count just once
-when the subclass count goes to zero.
-
-Examples of this kind of `multi-level-reference-counting` can be found
-in memory management (`struct mm_struct`: mm\_users and mm\_count), and
-in filesystem code (`struct super_block`: s\_count and s\_active).
-
-Remember: if another thread can find your data structure, and you don't
-have a reference count on it, you almost certainly have a bug.
-
-# 12\) Macros, Enums and RTL
+<a name="macros"/></a>
+# 9\) Macros
 
 Names of macros defining constants and labels in enums are capitalized.
 
@@ -769,181 +654,91 @@ Names of macros defining constants and labels in enums are capitalized.
 
 Enums are preferred when defining several related constants.
 
-CAPITALIZED macro names are appreciated but macros resembling functions
-may be named in lower case.
+**CAPITALIZED** macro names are appreciated but macros resembling functions
+may be named in lower case. Generally, inline functions are preferable to
+macros resembling functions.
 
-Generally, inline functions are preferable to macros resembling
-functions.
+Macros with multiple statements should be enclosed in a do - while block
+to allow it for a semicolon when used (so that `macrofun(x, y, z);`
+resembles a function call):
 
-Macros with multiple statements should be enclosed in a do - while
-block:
 
-``` c
-#define macrofun(a, b, c)           \
-    do {                    \
-        if (a == 5)         \
-            do_this(b, c);      \
-    } while (0)
+```c
+/* good */
+#define macrofun(a, b, c)		\
+	do {						\
+		if ((a) == 5) {			\
+			do_this((b), (c));	\
+		}						\
+	} while (0)
 ```
 
-Things to avoid when using macros:
+##### Things to avoid when using macros:
 
-1)  macros that affect control flow:
+a\) Macros that affect control flow:
 
-<!-- end list -->
-
-``` c
-#define FOO(x)                  \
-    do {                    \
-        if (blah(x) < 0)        \
-            return -EBUGGERED;  \
-    } while (0)
+```c
+/* good */
+#define FOO(x)							\
+	do {								\
+		int i = (x) & FATAL_SIG_MASK;	\
+		if (blah(i) < 0) {				\
+			return -EBUGGERED;			\
+		}								\
+	} while (0)
 ```
 
-is a **very** bad idea. It looks like a function call but exits the
-`calling` function; don't break the internal parsers of those who will
+are a **very** bad idea. It looks like a function call but exits the
+**calling** function; don't break the mental parsers of those who will
 read the code.
 
-2)  macros that depend on having a local variable with a magic name:
+b\) Macros that depend on having a local variable with a magic name:
 
-<!-- end list -->
-
-``` c
-#define FOO(val) bar(index, val)
+```c
+/* BAD */
+#define FOO(val) bar(magic_index, val)
 ```
 
 might look like a good thing, but it's confusing as hell when one reads
 the code and it's prone to breakage from seemingly innocent changes.
 
-3\) macros with arguments that are used as l-values: FOO(x) = y; will
-bite you if somebody e.g. turns FOO into an inline function.
+c\) Macros with arguments that are used as lvalues:
 
-4\) forgetting about precedence: macros defining constants using
+```c
+/* bad */
+FOO(x) = y;
+```
+
+**will** bite you if somebody e.g. turns `FOO()` into an inline function.
+
+d\) Forgetting about precedence: macros defining constants using
 expressions must enclose the expression in parentheses. Beware of
 similar issues with macros using parameters.
 
-``` c
+```c
+/* good */
 #define CONSTANT 0x4000
-#define CONSTEXP (CONSTANT | 3)
+#define CONSTEXP (SOME_CONSTANT|OTHER_CONSTANT)
 ```
 
-5\) namespace collisions when defining local variables in macros
-resembling functions:
+e\) Namespace collisions when defining local variables in macros
+resembling functions (such as GNU statement expressions):
 
-``` c
-#define FOO(x)              \
-({                  \
-    typeof(x) ret;          \
-    ret = calc_ret(x);      \
-    (ret);              \
+```c
+/* BAD */
+#define FOO(x)			\
+({						\
+	typeof(x) ret;		\
+	ret = calc_ret(x);	\
+	(ret);				\
 })
 ```
 
-ret is a common name for a local variable - \_\_foo\_ret is less likely
+`ret` is a common name for a local variable - `__foo_ret` is less likely
 to collide with an existing variable.
 
-The cpp manual deals with macros exhaustively. The gcc internals manual
-also covers RTL which is used frequently with assembly language in the
-kernel.
-
-# 13\) Printing kernel messages
-
-Kernel developers like to be seen as literate. Do mind the spelling of
-kernel messages to make a good impression. Do not use crippled words
-like `dont`; use `do not` or `don't` instead. Make the messages concise,
-clear, and unambiguous.
-
-Kernel messages do not have to be terminated with a period.
-
-Printing numbers in parentheses (%d) adds no value and should be
-avoided.
-
-There are a number of driver model diagnostic macros in
-\<linux/device.h\> which you should use to make sure messages are
-matched to the right device and driver, and are tagged with the right
-level: dev\_err(), dev\_warn(), dev\_info(), and so forth. For messages
-that aren't associated with a particular device, \<linux/printk.h\>
-defines pr\_notice(), pr\_info(), pr\_warn(), pr\_err(), etc.
-
-Coming up with good debugging messages can be quite a challenge; and
-once you have them, they can be a huge help for remote troubleshooting.
-However debug message printing is handled differently than printing
-other non-debug messages. While the other pr\_XXX() functions print
-unconditionally, pr\_debug() does not; it is compiled out by default,
-unless either DEBUG is defined or CONFIG\_DYNAMIC\_DEBUG is set. That is
-true for dev\_dbg() also, and a related convention uses VERBOSE\_DEBUG
-to add dev\_vdbg() messages to the ones already enabled by DEBUG.
-
-Many subsystems have Kconfig debug options to turn on -DDEBUG in the
-corresponding Makefile; in other cases specific files \#define DEBUG.
-And when a debug message should be unconditionally printed, such as if
-it is already inside a debug-related \#ifdef section, printk(KERN\_DEBUG
-...) can be used.
-
-# 14\) Allocating memory
-
-The kernel provides the following general purpose memory allocators:
-kmalloc(), kzalloc(), kmalloc\_array(), kcalloc(), vmalloc(), and
-vzalloc(). Please refer to the API documentation for further information
-about them.
-
-The preferred form for passing a size of a struct is the following:
-
-``` c
-p = kmalloc(sizeof(*p), ...);
-```
-
-The alternative form where struct name is spelled out hurts readability
-and introduces an opportunity for a bug when the pointer variable type
-is changed but the corresponding sizeof that is passed to a memory
-allocator is not.
-
-Casting the return value which is a void pointer is redundant. The
-conversion from void pointer to any other pointer type is guaranteed by
-the C programming language.
-
-The preferred form for allocating an array is the following:
-
-``` c
-p = kmalloc_array(n, sizeof(...), ...);
-```
-
-The preferred form for allocating a zeroed array is the following:
-
-``` c
-p = kcalloc(n, sizeof(...), ...);
-```
-
-Both forms check for overflow on the allocation size n \* sizeof(...),
-and return NULL if that occurred.
-
-# 15\) The inline disease
-
-There appears to be a common misperception that gcc has a magic "make me
-faster" speedup option called `inline`. While the use of inlines can be
-appropriate (for example as a means of replacing macros, see Chapter
-12), it very often is not. Abundant use of the inline keyword leads to a
-much bigger kernel, which in turn slows the system as a whole down, due
-to a bigger icache footprint for the CPU and simply because there is
-less memory available for the pagecache. Just think about it; a
-pagecache miss causes a disk seek, which easily takes 5 milliseconds.
-There are a LOT of cpu cycles that can go into these 5 milliseconds.
-
-A reasonable rule of thumb is to not put inline at functions that have
-more than 3 lines of code in them. An exception to this rule are the
-cases where a parameter is known to be a compiletime constant, and as a
-result of this constantness you *know* the compiler will be able to
-optimize most of your function away at compile time. For a good example
-of this later case, see the kmalloc() inline function.
-
-Often people argue that adding inline to functions that are static and
-used only once is always a win since there is no space tradeoff. While
-this is technically correct, gcc is capable of inlining these
-automatically without help, and the maintenance issue of removing the
-inline when a second user appears outweighs the potential value of the
-hint that tells gcc to do something it would have done anyway.
-
-# 16\) Function return values and names
+<a name="function-return-and-names"/></a>
+# 10\) Function return values and names
 
 Functions can return values of many different kinds, and one of the most
 common is a value indicating whether the function succeeded or failed.
@@ -957,114 +752,26 @@ between integers and booleans then the compiler would find these
 mistakes for us... but it doesn't. To help prevent such bugs, always
 follow this convention:
 
-    If the name of a function is an action or an imperative command,
-    the function should return an error-code integer.  If the name
-    is a predicate, the function should return a "succeeded" boolean.
+> If the name of a function is an action or an imperative command,
+> the function should return an error-code integer.  If the name
+> is a predicate, the function should return a "succeeded" boolean.
 
-For example, `add work` is a command, and the add\_work() function
-returns 0 for success or -EBUSY for failure. In the same way, `PCI
-device present` is a predicate, and the pci\_dev\_present() function
+For example, "add work" is a command, and the `add_work()` function
+returns 0 for success or `-EBUSY` for failure. In the same way, "PCI
+device present" is a predicate, and the `pci_dev_present()` function
 returns 1 if it succeeds in finding a matching device or 0 if it
 doesn't.
-
-All EXPORTed functions must respect this convention, and so should all
-public functions. Private (static) functions need not, but it is
-recommended that they do.
 
 Functions whose return value is the actual result of a computation,
 rather than an indication of whether the computation succeeded, are not
 subject to this rule. Generally they indicate failure by returning some
 out-of-range result. Typical examples would be functions that return
-pointers; they use NULL or the ERR\_PTR mechanism to report failure.
+pointers; they use `NULL` to report failure.
 
-# 17\) Don't re-invent the kernel macros
+<a name="conditional-compilation"/></a>
+# 11\) Conditional Compilation
 
-The header file include/linux/kernel.h contains a number of macros that
-you should use, rather than explicitly coding some variant of them
-yourself. For example, if you need to calculate the length of an array,
-take advantage of the macro
-
-``` c
-#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
-```
-
-Similarly, if you need to calculate the size of some structure member,
-use
-
-``` c
-#define FIELD_SIZEOF(t, f) (sizeof(((t*)0)->f))
-```
-
-There are also min() and max() macros that do strict type checking if
-you need them. Feel free to peruse that header file to see what else is
-already defined that you shouldn't reproduce in your code.
-
-# 18\) Editor modelines and other cruft
-
-Some editors can interpret configuration information embedded in source
-files, indicated with special markers. For example, emacs interprets
-lines marked like this:
-
-``` c
--*- mode: c -*-
-```
-
-Or like this:
-
-``` c
-/*
-Local Variables:
-compile-command: "gcc -DMAGIC_DEBUG_FLAG foo.c"
-End:
-*/
-```
-
-Vim interprets markers that look like this:
-
-``` c
-/* vim:set sw=8 noet */
-```
-
-Do not include any of these in source files. People have their own
-personal editor configurations, and your source files should not
-override them. This includes markers for indentation and mode
-configuration. People may use their own custom mode, or may have some
-other magic method for making indentation work correctly.
-
-# 19\) Inline assembly
-
-In architecture-specific code, you may need to use inline assembly to
-interface with CPU or platform functionality. Don't hesitate to do so
-when necessary. However, don't use inline assembly gratuitously when C
-can do the job. You can and should poke hardware from C when possible.
-
-Consider writing simple helper functions that wrap common bits of inline
-assembly, rather than repeatedly writing them with slight variations.
-Remember that inline assembly can use C parameters.
-
-Large, non-trivial assembly functions should go in .S files, with
-corresponding C prototypes defined in C header files. The C prototypes
-for assembly functions should use `asmlinkage`.
-
-You may need to mark your asm statement as volatile, to prevent GCC from
-removing it if GCC doesn't notice any side effects. You don't always
-need to do so, though, and doing so unnecessarily can limit
-optimization.
-
-When writing a single inline assembly statement containing multiple
-instructions, put each instruction on a separate line in a separate
-quoted string, and end each string except the last with `\n\t` to
-properly indent the next instruction in the assembly output:
-
-``` c
-asm ("magic %reg1, #42\n\t"
-     "more_magic %reg2, %reg3"
-     : /* outputs */ : /* inputs */ : /* clobbers */);
-```
-
-# 20\) Conditional Compilation
-
-Wherever possible, don't use preprocessor conditionals (\#if, \#ifdef)
+Wherever possible, don't use preprocessor conditionals (`#if`, `#ifdef`)
 in .c files; doing so makes code harder to read and logic harder to
 follow. Instead, use such conditionals in a header file defining
 functions for use in those .c files, providing no-op stub versions in
@@ -1077,40 +784,17 @@ functions or portions of expressions. Rather than putting an ifdef in an
 expression, factor out part or all of the expression into a separate
 helper function and apply the conditional to that function.
 
-If you have a function or variable which may potentially go unused in a
-particular configuration, and the compiler would warn about its
-definition going unused, mark the definition as \_\_maybe\_unused rather
-than wrapping it in a preprocessor conditional. (However, if a function
-or variable *always* goes unused, delete it.)
-
-Within code, where possible, use the IS\_ENABLED macro to convert a
-Kconfig symbol into a C boolean expression, and use it in a normal C
-conditional:
-
-``` c
-if (IS_ENABLED(CONFIG_SOMETHING)) {
-    ...
-}
-```
-
-The compiler will constant-fold the conditional away, and include or
-exclude the block of code just as with an \#ifdef, so this will not add
-any runtime overhead. However, this approach still allows the C compiler
-to see the code inside the block, and check it for correctness (syntax,
-types, symbol references, etc). Thus, you still have to use an \#ifdef
-if the code inside the block references symbols that will not exist if
-the condition is not met.
-
-At the end of any non-trivial \#if or \#ifdef block (more than a few
+At the end of any non-trivial `#if` or `#ifdef` block (more than a few
 lines), place a comment after the \#endif on the same line, noting the
 conditional expression used. For instance:
 
 ``` c
+/* good */
 #ifdef CONFIG_SOMETHING
 ...
 #endif /* CONFIG_SOMETHING */
 ```
-
+<a name="references"/></a>
 # Appendix I) References
 
 The C Programming Language, Second Edition by Brian W. Kernighan and
@@ -1119,10 +803,6 @@ Dennis M. Ritchie. Prentice Hall, Inc., 1988. ISBN 0-13-110362-8
 
 The Practice of Programming by Brian W. Kernighan and Rob Pike.
 Addison-Wesley, Inc., 1999. ISBN 0-201-61586-X.
-
-GNU manuals - where in compliance with K\&R and this text - for cpp,
-gcc, gcc internals and indent, all available from
-<http://www.gnu.org/manual/>
 
 WG14 is the international standardization working group for the
 programming language C, URL: <http://www.open-std.org/JTC1/SC22/WG14/>
