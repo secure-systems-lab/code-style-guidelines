@@ -14,8 +14,8 @@ Please at least consider the points made here."
 - [Introduction](#introduction)
 - [Indentation](#indentation)
 - [Breaking long lines and strings](#long-lines)
-- [Whitespace in Expressions and Statements](#whitespace-in-expressions-and-statements)
-- [Comments](#comments)
+- [Placing braces and spaces](#braces-and-spaces)
+- [Spaces](#spaces)
 - [Documentation Strings](#documentation-strings)
 - [Naming Conventions](#naming-conventions)
 - [Programming Recommendations](#programming-recommendations)
@@ -153,7 +153,7 @@ a long argument list. However, never break user-visible strings such as
 them.
 
 <a name="braces-and-spaces"/></a>
-# 3\) Placing Braces and Spaces
+# 3\) Placing braces and spaces
 
 The other issue that always comes up in C styling is the placement of
 braces. Unlike the indent size, there are few technical reasons to
@@ -162,24 +162,28 @@ shown to us by the prophets Kernighan and Ritchie, is to put the opening
 brace last on the line, and put the closing brace first, thusly:
 
 ``` c
-if (x is true) {
-    we do y
+/* good */
+if (x_is_true) {
+	we_do_y();
 }
 ```
 
-This applies to all non-function statement blocks (if, switch, for,
-while, do). E.g.:
+This applies to all non-function statement blocks (`if`, `switch`, `for`,
+`while`, `do`).
+
+e.g.:
 
 ``` c
+/* good */
 switch (action) {
 case KOBJ_ADD:
-    return "add";
+	return "add";
 case KOBJ_REMOVE:
-    return "remove";
+	return "remove";
 case KOBJ_CHANGE:
-    return "change";
+	return "change";
 default:
-    return NULL;
+	return NULL;
 }
 ```
 
@@ -187,9 +191,10 @@ However, there is one special case, namely functions: they have the
 opening brace at the beginning of the next line, thus:
 
 ``` c
+/* good */
 int function(int x)
 {
-    body of function
+	body of function
 }
 ```
 
@@ -200,73 +205,84 @@ special anyway (you can't nest them in C).
 
 Note that the closing brace is empty on a line of its own, **except** in
 the cases where it is followed by a continuation of the same statement,
-ie a `while` in a do-statement or an `else` in an if-statement, like
+i.e. a `while` in a do-statement or an `else` in an if-statement, like
 this:
 
 ``` c
+/* good */
 do {
-    body of do-loop
+	body_of_do_loop();
 } while (condition);
 ```
 
 and
 
 ``` c
+/* good */
 if (x == y) {
-    ..
+	foo();
 } else if (x > y) {
-    ...
+	bar();
 } else {
-    ....
+	baz();
 }
 ```
 
-Rationale: K\&R.
+**Rationale:** K\&R2.
 
-Also, note that this brace-placement also minimizes the number of empty
-(or almost empty) lines, without any loss of readability. Thus, as the
-supply of new-lines on your screen is not a renewable resource (think
-25-line terminal screens here), you have more empty lines to put
-comments on.
+It's also useful to note that this brace-placement minimizes the number of
+empty (or almost empty) lines, without any loss of readability. Thus, as the
+supply of newlines on your screen is not a renewable resource (think 25-line
+terminal screens here), you have more empty lines to put comments on.
 
-Do not unnecessarily use braces where a single statement will do.
+Use braces even for single statements:
 
 ``` c
-if (condition)
-    action();
+/* good */
+if (condition) {
+	action();
+}
 ```
 
 and
 
-``` sourceCode none
-if (condition)
-    do_this();
-else
-    do_that();
-```
-
-This does not apply if only one branch of a conditional statement is a
-single statement; in the latter case use braces in both branches:
-
 ``` c
+/* good */
 if (condition) {
-    do_this();
-    do_that();
+	do_this();
 } else {
-    otherwise();
+	do_that();
 }
 ```
 
-Also, use braces when a loop contains more than a single simple
-statement:
+**Rationale:** Everyone makes mistakes, but some mistakes, as shown by Apple's ["goto fail"](https://nakedsecurity.sophos.com/2014/02/24/anatomy-of-a-goto-fail-apples-ssl-bug-explained-plus-an-unofficial-patch/):
 
 ``` c
-while (condition) {
-    if (test)
-        do_something();
-}
+/* BAD BAD BAD */
+hashOut.data = hashes + SSL_MD5_DIGEST_LEN;
+hashOut.length = SSL_SHA1_DIGEST_LEN;
+if ((err = SSLFreeBuffer(&hashCtx)) != 0)
+    goto fail;
+if ((err = ReadyHash(&SSLHashSHA1, &hashCtx)) != 0)
+    goto fail;
+if ((err = SSLHashSHA1.update(&hashCtx, &clientRandom)) != 0)
+    goto fail;
+if ((err = SSLHashSHA1.update(&hashCtx, &serverRandom)) != 0)
+    goto fail;
+if ((err = SSLHashSHA1.update(&hashCtx, &signedParams)) != 0)
+    goto fail;
+    goto fail;  /* MISTAKE! THIS LINE SHOULD NOT BE HERE */
+if ((err = SSLHashSHA1.final(&hashCtx, &hashOut)) != 0)
+    goto fail;
+
+err = sslRawVerify(...);
 ```
 
+are very easily prevented.
+
+It's **always** better to code defensively, no matter how careful you **think** you are.
+
+<a name="spaces"/></a>
 ## 3.1) Spaces
 
 Linux kernel style for use of spaces depends (mostly) on
