@@ -19,6 +19,7 @@ Please at least consider the points made here."
 - [Naming](#naming)
 - [Typedefs](#typedefs)
 - [Functions](#functions)
+- [Centralized exiting of functions](#function-exit)
 
 <a name="introduction"/></a>
 # Introduction
@@ -90,7 +91,9 @@ Heed that warning.
 
 The preferred way to ease multiple indentation levels in a switch
 statement is to align the `switch` and its subordinate `case` labels in
-the same column instead of `double-indenting` the `case` labels. E.g.:
+the same column instead of `double-indenting` the `case` labels.
+
+e.g.:
 
 ``` c
 /* good */
@@ -293,7 +296,9 @@ So use a space after these keywords:
 > if, switch, case, for, do, while
 
 but not with the function-resembling forms of sizeof, typeof, alignof,
-or \_\_attribute\_\_. E.g.,
+or \_\_attribute\_\_.
+
+e.g.:
 
 ``` c
 /* good */
@@ -469,34 +474,39 @@ However, if you have a complex function, and you suspect that a
 less-than-gifted first-year high-school student might not even
 understand what the function is all about, you should adhere to the
 maximum limits all the more closely. Use helper functions with
-descriptive names (you can ask the compiler to in-line them if you think
+descriptive names (you can ask the compiler to `inline` them if you think
 it's performance-critical, and it will probably do a better job of it
 than you would have done).
 
 Another measure of the function is the number of local variables. They
 shouldn't exceed 5-10, or you're doing something wrong. Re-think the
-function, and split it into smaller pieces. A human brain can generally
-easily keep track of about 7 different things, anything more and it gets
-confused. You know you're brilliant, but maybe you'd like to understand
-what you did 2 weeks from now.
+function, and split it into smaller pieces. A human brain in general can
+easily keep track of about 7 different things, but anything more and it
+gets confused. You know you're brilliant, but maybe you'd like to
+understand what you did 2 weeks from now.
 
-In source files, separate functions with one blank line. If the function
-is exported, the **EXPORT** macro for it should follow immediately after
-the closing function brace line. E.g.:
+In source files, separate functions with one blank line.
 
-``` c
+e.g.:
+
+```c
+/* good */
 int system_is_up(void)
 {
     return system_state == SYSTEM_RUNNING;
 }
-EXPORT_SYMBOL(system_is_up);
+
+int system_is_dowm(void)
+{
+    return system_state == SYSTEM_DOWN;
+}
 ```
 
 In function prototypes, include parameter names with their data types.
-Although this is not required by the C language, it is preferred in
-Linux because it is a simple way to add valuable information for the
-reader.
+Although this is not required by the C language, it is preferred because
+it is a simple way to add valuable information for the reader.
 
+<a name="function-exit"/></a>
 # 7\) Centralized exiting of functions
 
 Albeit deprecated by some people, the equivalent of the goto statement
