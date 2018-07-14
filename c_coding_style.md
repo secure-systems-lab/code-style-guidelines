@@ -539,8 +539,6 @@ The rationale for using gotos is:
 	  modifications are prevented.
 	- Saves the compiler work to optimize redundant code away.
 
-	<!-- end list -->
-
 So use them in situations like this to avoid making already confusing code
 even more complicated:
 
