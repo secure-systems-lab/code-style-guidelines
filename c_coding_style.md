@@ -16,10 +16,7 @@ Please at least consider the points made here."
 - [Breaking long lines and strings](#long-lines)
 - [Placing braces and spaces](#braces-and-spaces)
 - [Spaces](#spaces)
-- [Documentation Strings](#documentation-strings)
-- [Naming Conventions](#naming-conventions)
-- [Programming Recommendations](#programming-recommendations)
-- [Potpourri](#potpourri)
+- [Naming](#naming)
 
 <a name="introduction"/></a>
 # Introduction
@@ -285,20 +282,19 @@ It's **always** better to code defensively, no matter how careful you **think** 
 <a name="spaces"/></a>
 ## 3.1) Spaces
 
-Linux kernel style for use of spaces depends (mostly) on
-function-versus-keyword usage. Use a space after (most) keywords. The
-notable exceptions are sizeof, typeof, alignof, and \_\_attribute\_\_,
-which look somewhat like functions (and are usually used with
-parentheses in Linux, although they are not required in the language, as
-in: `sizeof info` after `struct fileinfo info;` is declared).
+The use of spaces depends (mostly) on function-versus-keyword usage. Use a
+space after (most) keywords. The notable exceptions are sizeof, typeof,
+alignof, and \_\_attribute\_\_, when using the form resembling functions.
 
 So use a space after these keywords:
 
-    if, switch, case, for, do, while
+	if, switch, case, for, do, while
 
-but not with sizeof, typeof, alignof, or \_\_attribute\_\_. E.g.,
+but not with the function-resembling forms of sizeof, typeof, alignof,
+or \_\_attribute\_\_. E.g.,
 
 ``` c
+/* good */
 s = sizeof(struct file);
 ```
 
@@ -306,6 +302,7 @@ Do not add spaces around (inside) parenthesized expressions. This
 example is **bad**:
 
 ``` c
+/* BAD */
 s = sizeof( struct file );
 ```
 
@@ -314,6 +311,7 @@ the preferred use of `*` is adjacent to the data name or function name
 and not adjacent to the type name. Examples:
 
 ``` c
+/* good */
 char *linux_banner;
 unsigned long long memparse(char *ptr, char **retptr);
 char *match_strdup(substring_t *s);
@@ -322,19 +320,19 @@ char *match_strdup(substring_t *s);
 Use one space around (on each side of) most binary and ternary
 operators, such as any of these:
 
-    =  +  -  <  >  *  /  %  |  &  ^  <=  >=  ==  !=  ?  :
+	=  +  -  <  >  *  /  %  |  &  ^  <=  >=  ==  !=  ?  :
 
 but no space after unary operators:
 
-    &  *  +  -  ~  !  sizeof  typeof  alignof  __attribute__  defined
+	&  *  +  -  ~  !  sizeof  typeof  alignof  __attribute__  defined
 
 no space before the postfix increment & decrement unary operators:
 
-    ++  --
+	++  --
 
 no space after the prefix increment & decrement unary operators:
 
-    ++  --
+	++  --
 
 and no space around the `.` and `->` structure member operators.
 
@@ -350,6 +348,7 @@ can optionally strip the trailing whitespace for you; however, if
 applying a series of patches, this may make later patches in the series
 fail by changing their context lines.
 
+<a name="naming"/></a>
 # 4\) Naming
 
 C is a Spartan language, and so should your naming be. Unlike Modula-2
