@@ -66,7 +66,7 @@ be afraid to exercise common sense.
 Nonetheless, if there are any guidelines here which you absolutely cannot
 stand, or if there are any grave pragmatic or security concerns regarding any
 of these guidelines, please don't hesitate to direct any feedback to
-@alyptik (Joey Pabalinas <joeypabalinas@gmail.com>).
+[@alyptik](https://github.com/alyptik) (Joey Pabalinas \<<joeypabalinas@gmail.com>\>).
 
 About half of the document is verbatim from the Linux kernel coding style
 guidelines (of which I am a staunch believer in, as you can probably
@@ -139,9 +139,8 @@ diffs more, well, difficult, and most editors these days have features
 to quickly remove all trailing whitespace from a document.
 
 Outside of comments and documentation, spaces should never be used for
-indentation, and the above example is deliberately broken. It's much
-easier to avoid mixed and incorrect indentation with tabs, as well as
-to modify or remove indentation levels.
+indentation. It's much easier to avoid mixed and incorrect indentation
+with tabs, as well as to modify or remove indentation levels.
 
 <a name="long-lines"/></a>
 # 2\) Breaking long lines and strings
