@@ -18,6 +18,7 @@ Please at least consider the points made here."
 - [Spaces](#spaces)
 - [Naming](#naming)
 - [Typedefs](#typedefs)
+- [Functions](#functions)
 
 <a name="introduction"/></a>
 # Introduction
@@ -368,7 +369,7 @@ the number of active users, you should call that `count_active_users()` or
 similar, you should **not** call it `cntusr()`.
 
 Encoding the type of a function into the name (so-called Hungarian
-notation) is pointless --- the compiler knows the types anyway and can
+notation) is pointless - the compiler knows the types anyway and can
 check those, so it only serves to confuse the programmer.
 
 **LOCAL** variable names should be short, and to the point. If you have some
@@ -402,80 +403,47 @@ struct virtual_container *a;
 
 you can actually tell what `a` is.
 
-Lots of people think that typedefs `help readability`. Not so. They are
+Lots of people think that typedefs help readability. Not so. They are
 useful only for:
 
-> 1)  totally opaque objects (where the typedef is actively used to
->     **hide** what the object is).
->     
->     Example: `pte_t` etc. opaque objects that you can only access
->     using the proper accessor functions.
->     
->     <div class="note">
->     
->     <div class="admonition-title">
->     
->     Note
->     
->     </div>
->     
->     Opaqueness and `accessor functions` are not good in themselves.
->     The reason we have them for things like pte\_t etc. is that there
->     really is absolutely **zero** portably accessible information
->     there.
->     
->     </div>
-> 
-> 2)  Clear integer types, where the abstraction **helps** avoid
->     confusion whether it is `int` or `long`.
->     
->     u8/u16/u32 are perfectly fine typedefs, although they fit into
->     category (d) better than here.
->     
->     <div class="note">
->     
->     <div class="admonition-title">
->     
->     Note
->     
->     </div>
->     
->     Again - there needs to be a **reason** for this. If something is
->     `unsigned long`, then there's no reason to do
->     
->     </div>
-> 
-> > typedef unsigned long myflags\_t;
-> > 
-> > > but if there is a clear reason for why it under certain
-> > > circumstances might be an `unsigned int` and under other
-> > > configurations might be `unsigned long`, then by all means go
-> > > ahead and use a typedef.
-> 
-> 3)  when you use sparse to literally create a **new** type for
->     type-checking.
-> 
-> 4)  New types which are identical to standard C99 types, in certain
->     exceptional circumstances.
->     
->     Although it would only take a short amount of time for the eyes
->     and brain to become accustomed to the standard types like
->     `uint32_t`, some people object to their use anyway.
->     
->     Therefore, the Linux-specific `u8/u16/u32/u64` types and their
->     signed equivalents which are identical to standard types are
->     permitted -- although they are not mandatory in new code of your
->     own.
->     
->     When editing existing code which already uses one or the other set
->     of types, you should conform to the existing choices in that code.
-> 
-> 5)  Types safe for use in userspace.
->     
->     In certain structures which are visible to userspace, we cannot
->     require C99 types and cannot use the `u32` form above. Thus, we
->     use \_\_u32 and similar types in all structures which are shared
->     with userspace.
+	a) Totally opaque objects (where the typedef is actively used to
+	   *_hide_ what the object is).
+
+	   Example: `pte_t` etc. opaque objects that you can only access
+	   using the proper accessor functions.
+
+	   Opaqueness and `accessor functions` are not good in themselves.
+	   The reason we have them for things like `pte_t` etc. is that there
+	   really is absolutely _zero_ portably accessible information
+	   there.
+
+	b) Clear integer types, where the abstraction _helps_ avoid
+	   confusion whether it is `int` or `long`.
+
+	   u8/u16/u32 are perfectly fine typedefs, although they fit into
+	   category (c) better than here.
+
+	   Again - there needs to be a reason for this. If something is
+	   `unsigned long`, then there's no reason to typedef,
+	   but if under certain circumstances it might be an `unsigned int`
+	   and under other configurations might be `unsigned long`, then
+	   by all means go ahead and use a typedef.
+
+	c) New types which are identical to standard C99 types, in certain
+	   exceptional circumstances.
+
+	   Although it would only take a short amount of time for the eyes
+	   and brain to become accustomed to the standard types like
+	   `uint32_t`, some people object to their use anyway.
+
+	   Therefore, the Linux-specific `u8/u16/u32/u64` types and their
+	   signed equivalents which are identical to standard types are
+	   permitted - although they are not mandatory in new code of your
+	   own.
+
+	   When editing existing code which already uses one or the other set
+	   of types, you should conform to the existing choices in that code.
+
 
 Maybe there are other cases too, but the rule should basically be to
 NEVER EVER use a typedef unless you can clearly match one of those
@@ -484,6 +452,7 @@ rules.
 In general, a pointer, or a struct that has elements that can reasonably
 be directly accessed should **never** be a typedef.
 
+<a name="functions"/></a>
 # 6\) Functions
 
 Functions should be short and sweet, and do just one thing. They should
