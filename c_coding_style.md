@@ -4,7 +4,8 @@ These guidelines provide examples of what to do (or not to do) when writing
 C code for the projects of the [Secure Systems Lab](https://ssl.engineering.nyu.edu/)
 in the NYU Tandon School of Engineering.
 
-These guidelines are based on a document describing [the preferred coding style](https://www.kernel.org/doc/html/v4.10/process/coding-style.html)
+These guidelines are based on a document describing
+[the preferred coding style](https://www.kernel.org/doc/html/v4.17/process/coding-style.html)
 for the Linux kernel. As the document states:
 
 > "Coding style is very personal, and I won't **force** my views on anybody
