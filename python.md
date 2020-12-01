@@ -2,7 +2,7 @@
 
 There are many excellent Python style guides out there, usually based on [PEP
 8](https://www.python.org/dev/peps/pep-0008/) -- the mother of all Python style
-guides. Following the principle of reuse, we recommend an existing guides that
+guides. Following the principle of reuse, we recommend an existing guide that
 we find suitable, and only add a few refinements and accentuation to it. In
 short:
 
@@ -170,7 +170,7 @@ old `"...%s" % var`-notation.
 <!-- TODO: This recommendation is an updated remainder of the old style guide.
 It seems a bit lost here. -->
 
-- Avoid `if` and `else` keywords be separated by a lot of code.
+- Avoid large vertical separation of `if` and `else` keywords.
   ```python
   # NO:
   if bizbaz:
@@ -213,4 +213,3 @@ Write 90% tests. The test should make sure that it will catch 90% of the
 potential problems with the function. Avoid writing 50% tests (that only check
 a common case or two) and avoid writing 99.9% tests because it will consume too
 much of your time.
-

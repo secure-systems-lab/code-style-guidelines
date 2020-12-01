@@ -15,6 +15,6 @@ projects that are used in production.
 
 And last but not least, readable code allows contributors of all different
 backgrounds and skill levels to engage in our projects, which in turn helps to
-create lively and diverse open source community.
+create a lively and diverse open source community.
 
 - [Python Style Guidelines](python.md)
