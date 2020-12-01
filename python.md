@@ -208,14 +208,3 @@ It seems a bit lost here. -->
   If returning early is not an option, and  `if` and `else` are thus both
   needed, it is slightly preferable to keep the shorter clause first, so that
   the `else` isn't too far from the `if`.
-
-
-
-### Testing
-
-<!-- TODO: Should we add more tangible instructions? -->
-
-Write 90% tests. The test should make sure that it will catch 90% of the
-potential problems with the function. Avoid writing 50% tests (that only check
-a common case or two) and avoid writing 99.9% tests because it will consume too
-much of your time.
