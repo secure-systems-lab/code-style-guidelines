@@ -157,6 +157,12 @@ version control system can provide that information just as well.
 *[cf. Google Python Style Guide
 [Strings](https://google.github.io/styleguide/pyguide.html#310-strings)]*
 
+#### Quotes
+Favor double quotes `"` over single quotes `'` for regular strings, unless the
+string itself contains double quotes. If the string contains both single and
+double quotes, pick whatever requires less escaping inside the string.
+
+#### String Formatting
 Use `f"...{var}"` when writing Python 3.6+ code, or `"...{0}".format(var)`
 anywhere. `"..." + var` may be used for simple cases, but beware of pitfalls
 such as easily missed whitespace, or `var` not being a string. Don't use the
