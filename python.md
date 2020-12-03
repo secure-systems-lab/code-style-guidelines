@@ -3,7 +3,7 @@
 There are many excellent Python style guides out there, usually based on [PEP
 8](https://www.python.org/dev/peps/pep-0008/) -- the mother of all Python style
 guides. Following the principle of reuse, we recommend an existing guide that
-we find suitable, and only add a few refinements and accentuation to it. In
+we find suitable, and only add a few refinements and accents. In
 short:
 
 - Follow the recommendations of this document.
@@ -13,14 +13,14 @@ short:
 - Follow local customs when working on existing code.
 - Knowing [PEP 8](https://www.python.org/dev/peps/pep-0008/) doesn't hurt.
 - Strive for readability and keep junior programmers in mind.
-- Maintainers and linters have the authority, which you may challenge if you
-  have good reason.
+- Though maintainers and linters have the authority, you may challenge them if you
+  have good reason to do so.
 - Add a suitable linter configuration to your project if it does not have one.
-  You can take inspiration from well-established Python lab-projects such as
+  You can take inspiration from well-established Python lab projects such as
   [in-toto](https://github.com/in-toto/in-toto) and
   [TUF](https://github.com/theupdateframework/tuf).
 - If you are familiar with auto-formatters such as `yapf`, `black`, `autopep8`,
-  etc. feel free to share a config file that adheres to this guideline
+  etc. feel free to share a config file that adheres to this guidelines
   document. :)
 
 
@@ -84,7 +84,7 @@ and resolve potential problems like so:
       foo()
   ```
   Note that function definitions may also deindent the closing parenthesis to
-  align with the `def` keyword as demonstrated in the Google Python Style Guide
+  align with the `def` keyword, as demonstrated in the Google Python Style Guide
   [Type
   Annotations](https://google.github.io/styleguide/pyguide.html#3192-line-breaking)
   section.
@@ -92,7 +92,7 @@ and resolve potential problems like so:
 - **Problem:** Renames in first line might require re-aligning continued lines.\
   **Solution:** Avoid renames by picking [good
   names](https://duckduckgo.com/?q=There+are+only+two+hard+things+in+Computer+Science%3A+cache+invalidation+and+naming+things)
-  right away. :P
+  from the start. :P
 
 - **Special case:** Also align continued lines of continued lines:
 
